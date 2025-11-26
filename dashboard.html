@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  * { box-sizing: border-box; margin:0; padding:0; font-family:'Poppins',sans-serif; }
+  body, html { 
+    height: 100%; 
+    width: 100%; 
+    background: url("https://i.pinimg.com/1200x/db/be/f2/dbbef2427bac57f91da654fafc659546.jpg") no-repeat center center;
+    background-size: cover; /* Makes the image cover the entire screen */
+    background-attachment: fixed; /* Optional: keeps it fixed on scroll */
+}
+
+  .container { display: flex; height: 100vh; width: 100vw; }
+
+  /* LEFT SIDEBAR */
+  .sidebar {
+    width: 220px; 
+    background: url("/ICONS/nav.jpg"); 
+    color:rgb(161, 156, 118);
+    display:flex; flex-direction:column; padding-top:20px; position:relative;
+  }
+
+  .sidebar .logo { text-align:center; margin-bottom:30px; }
+  .sidebar .logo img { width:120px; border-radius:10px; }
+
+ /* SIDEBAR NAV LINKS */
+.sidebar nav a {
+  display: block;
+  padding: 15px 20px;
+  color: rgb(0, 0, 0);
+  text-decoration: none;
+  margin-bottom: 5px;
+  border-radius: 5px;
+  transition: all 0.3s ease; /* smooth hover */
+}
+
+/* Hover effect only */
+.sidebar nav a:hover {
+  background-color: rgb(226, 218, 185); /* light highlight */
+  transform: scale(1.03); /* optional: subtle zoom */
+}
+
+/* Remove active styling entirely */
+.sidebar nav a.active {
+  background: none;
+  color: rgb(0, 0, 0);
+  font-weight: normal;
+}
+
+
+  /* MAIN AREA */
+  .main {
+    flex:1; display:flex; flex-direction:column; padding:20px; position:relative; overflow-y:auto;
+  }
+
+  /* TOP BAR WRAPPER WITH BACKGROUND */
+  .top-bar-wrapper {
+    width: 100%;
+    background-color: #ffffff; /* light blue background */
+    padding: 15px 20px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    position: relative;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
+  .top-bar {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+  }
+
+  .welcome-text { font-size: 1rem; color: #000000; }
+
+  .search-container input {
+    width: 300px;
+    padding: 10px 15px;
+    border-radius: 5px;
+    border: 1px solid #167740;
+    font-size: 1rem;
+  }
+
+  .profile { margin-left: auto; cursor:pointer; }
+  .profile img { width:50px; height:50px; border-radius:50%; }
+
+  /* OVERVIEW HEADER */
+  .overview-header { margin-top:20px; font-size:1.5rem; font-weight:600; text-align:left; color: rgb(0, 0, 0); }
+
+  /* HORIZONTAL SCROLL CARDS */
+  .scroll-wrapper {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    padding: 15px 0;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    margin-top: 10px;
+    min-height: 200px;
+    flex-wrap: nowrap;
+  }
+
+  .scroll-wrapper::-webkit-scrollbar { display: none; }
+
+  .data-card {
+    flex: 0 0 auto;
+    width: 280px;
+    background: white;
+    padding: 20px;
+    border-radius: 18px;
+    box-shadow: 0 5px 14px rgba(0,0,0,0.12);
+    scroll-snap-align: start;
+    transition: 0.25s ease;
+    display: flex;
+    gap: 15px;
+    position: relative;
+  }
+
+  .data-card:hover { transform: scale(1.04); }
+
+  .color-line {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    border-radius: 0 0 18px 18px;
+  }
+
+  .icon-box {
+    width: 50px;
+    height: 50px;
+    background: #dfe4ea;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+  .icon-box img { width: 45px; height: 45px; object-fit: cover; }
+
+  .text-box { flex: 1; }
+  .field-title { font-size: 13px; font-weight: bold; color: #444; margin-top: 3px; }
+  .field-value { font-size: 14px; color: #222; margin-bottom: 3px; }
+
+  /* CHART SECTION */
+  .chart-section { width: 100%; padding: 20px 0 0 0; margin-top: 20px; }
+  .chart-title { margin-bottom: 15px; font-size: 24px; font-weight: 700; color: #333; padding-left: 5px; }
+  .chart-layout { display: flex; gap: 20px; flex-wrap: wrap; }
+
+  .big-chart-box {
+    flex: 1;
+    min-width: 300px;
+    height: 400px;
+    background: white;
+    border-radius: 16px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    padding: 20px;
+    position: relative;
+  }
+
+  .weather-box {
+    width: 260px;
+    min-width: 200px;
+    height: 400px;
+    background: rgb(47, 159, 110);
+    border-radius: 16px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    padding: 20px;
+  }
+
+  .placeholder-text { font-size: 14px; color: #ffffff; text-align: center; margin-top: 40%; }
+
+  /* Section title */
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 20px 0 10px 0;
+    color: #000000;
+  }
+
+  /* News feed container */
+  .news-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 10px;
+  }
+
+  .news-wrapper::-webkit-scrollbar { width: 6px; }
+  .news-wrapper::-webkit-scrollbar-thumb { background-color: rgba(0,0,0,0.2); border-radius: 3px; }
+
+  .news-post {
+    background: rgb(47, 159, 110);
+    border-radius: 12px;
+    padding: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    display: flex;
+    gap: 15px;
+    align-items: flex-start;
+  }
+
+  .news-post img { width: 100px; height: 100px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
+  .news-text { flex: 1; }
+  .news-title { font-size: 16px; font-weight: 600; margin-bottom: 5px; color: #ffffff; }
+  .news-desc { font-size: 14px; color: #ffffff; line-height: 1.4; }
+
+  /* Responsive */
+  @media(max-width: 900px){
+    .news-post { flex-direction: column; align-items: flex-start; }
+    .news-post img { width: 100%; height: 200px; }
+    .chart-layout { flex-direction: column; }
+    .weather-box, .big-chart-box { width: 100%; height: 350px; }
+    .scroll-wrapper { overflow-x: auto; flex-wrap: nowrap; height: 200px; }
+    .container { flex-direction: column; }
+    .sidebar { width:100%; flex-direction:row; overflow-x:auto; padding:10px 0; justify-content:space-around; }
+    .sidebar nav { display:flex; gap:10px; }
+    .main { padding:10px; }
+    .search-container input { width:90%; }
+    .profile { position:static; margin:10px 0; display:flex; justify-content:flex-end; }
+  }
+
+</style>
+</head>
+<body>
+
+<div class="container">
+  <!-- SIDEBAR -->
+  <div class="sidebar">
+    <div class="logo">
+      <img src="/ICONS/logo1.png" alt="Logo">
+    </div>
+    <nav>
+      <a href="index.html" data-page="index.html">Home</a>
+      <a href="#" data-page="dashboard">Dashboard</a>
+      <a href="#" data-page="about">About</a>
+      <a href="#" data-page="checkmap">Check Map</a>
+      <a href="#" data-page="updates">Updates</a>
+      <a href="#" data-page="contacts">Contacts</a>
+    </nav>
+  </div>
+  
+
+  <!-- MAIN -->
+  <div class="main">
+    <!-- TOP BAR WITH BACKGROUND -->
+    <div class="top-bar-wrapper">
+      <div class="top-bar">
+        <div class="welcome-text">Welcome, User!</div>
+        <div class="search-container">
+          <input type="text" placeholder="Search here...">
+        </div>
+        <div class="profile">
+          <img src="https://i.pinimg.com/736x/53/84/a6/5384a6e9cf74a52248aa9714951f04d1.jpg" alt="Profile">
+        </div>
+      </div>
+    </div>
+
+    <!-- OVERVIEW HEADER -->
+    <div class="overview-header">Overview</div>
+    <div class="scroll-wrapper" id="cardContainer"></div>
+
+    <div class="chart-section">
+      <h2 class="chart-title">Recent Chart</h2>
+      <div class="chart-layout">
+        <div class="big-chart-box">
+          <p class="placeholder-text">📊 Bar Chart Goes Here</p>
+        </div>
+        <div class="weather-box">
+          <p class="placeholder-text">☀️ Live Weather</p>
+        </div>
+      </div>
+
+      <div class="top-news-section">
+        <h2 class="section-title">Top News</h2>
+        <div class="news-wrapper" id="newsContainer"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  const navLinks = document.querySelectorAll(".sidebar nav a");
+  const main = document.querySelector(".main");
+
+navLinks.forEach(link => {
+  link.addEventListener("click", () => {
+    // optional: hover effect only
+    navLinks.forEach(l => l.classList.remove("active"));
+    link.classList.add("active");
+  });
+});
+
+
+
+  const issueData = [
+    { location: "Zone 3 Riverside", issue: "Flooding", date: "2025-01-12", icon: "https://cdn-icons-png.flaticon.com/512/606/606797.png" },
+    { location: "Purok 5 Highway", issue: "Road Damage", date: "2025-01-14", icon: "https://cdn-icons-png.flaticon.com/512/854/854866.png" },
+    { location: "Sitio Mabini", issue: "Power Outage", date: "2025-01-20", icon: "https://cdn-icons-png.flaticon.com/512/3105/3105186.png" },
+    { location: "Crossing Delta", issue: "Fallen Tree", date: "2025-01-21", icon: "https://cdn-icons-png.flaticon.com/512/616/616489.png" },
+        { location: "Crossing Delta", issue: "Fallen Tree", date: "2025-01-21", icon: "https://cdn-icons-png.flaticon.com/512/616/616489.png" },
+            { location: "Crossing Delta", issue: "Fallen Tree", date: "2025-01-21", icon: "https://cdn-icons-png.flaticon.com/512/616/616489.png" }
+  ];
+
+  const colors = ["#ff7675", "#74b9ff", "#55efc4", "#ffeaa7", "#fab1a0"];
+  const container = document.getElementById("cardContainer");
+
+  issueData.forEach((data, i) => {
+    const card = document.createElement("div");
+    card.className = "data-card";
+    const randomColor = colors[i % colors.length];
+
+    card.innerHTML = `
+      <div class="icon-box"><img src="${data.icon}"></div>
+      <div class="text-box">
+        <div class="field-title">Location:</div>
+        <div class="field-value">${data.location}</div>
+        <div class="field-title">Issue:</div>
+        <div class="field-value">${data.issue}</div>
+        <div class="field-title">Date:</div>
+        <div class="field-value">${data.date}</div>
+      </div>
+      <div class="color-line" style="background: ${randomColor}"></div>
+    `;
+    container.appendChild(card);
+  });
+
+  const newsData = [
+    { title: "Flood hits Riverside area", description: "Heavy rains caused flooding in Zone 3 Riverside, residents advised to stay indoors.", image: "https://cdn-icons-png.flaticon.com/512/414/414927.png" },
+    { title: "Highway road damage reported", description: "Purok 5 Highway has several potholes after recent landslides.", image: "https://cdn-icons-png.flaticon.com/512/854/854866.png" },
+    { title: "Power outage in Sitio Mabini", description: "Electricity has been disrupted due to fallen lines. Repairs ongoing.", image: "https://cdn-icons-png.flaticon.com/512/3105/3105186.png" }
+  ];
+
+  const newsContainer = document.getElementById("newsContainer");
+  newsData.forEach(item => {
+    const post = document.createElement("div");
+    post.className = "news-post";
+    post.innerHTML = `
+      <img src="${item.image}" alt="${item.title}">
+      <div class="news-text">
+        <div class="news-title">${item.title}</div>
+        <div class="news-desc">${item.description}</div>
+      </div>
+    `;
+    newsContainer.appendChild(post);
+  });
+</script>
+
+</body>
+</html>
