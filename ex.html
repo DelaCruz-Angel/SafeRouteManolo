@@ -99,3 +99,79 @@
 
 </body>
 </html>
+
+
+
+
+
+
+
+/* MAP + INFO SECTION */
+.map-info-container {
+    display: flex;
+    flex: 1;
+    gap: 20px;
+}
+
+/* MAP */
+#map {
+    flex: 2;
+    height: 500px;
+    border-radius: 16px;
+}
+
+/* INFO BOX */
+.info-box {
+    flex: 1;
+    background: #fff;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    height: 500px;
+    overflow-y: auto;
+}
+
+.info-box h2 { margin-bottom: 10px; }
+.info-box p { margin-bottom: 8px; }
+
+/* RESPONSIVE */
+@media(max-width: 900px) {
+    .map-info-container { flex-direction: column; }
+    #map, .info-box { height: 300px; }
+}
+
+
+
+    <!-- MAP + INFO BOX -->
+    <div class="map-info-container">
+      <div id="map"></div>
+      <div class="info-box">
+        <h2>Location Info</h2>
+        <p>Click a marker on the map to see details here.</p>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+/ Initialize Leaflet map
+var map = L.map('map').setView([8.3695, 124.8643], 13);
+
+// Add OSM tiles
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19 }).addTo(map);
+
+// Example marker
+var marker = L.marker([8.3695, 124.8643]).addTo(map);
+marker.bindPopup("<b>Sample Location</b>").openPopup();
+
+// Click marker -> update info box
+marker.on('click', function() {
+  document.querySelector('.info-box').innerHTML = `
+    <h2>Sample Location</h2>
+    <p>Coordinates: 8.3695, 124.8643</p>
+    <p>Description: This is a sample location marker.</p>
+  `;
+});

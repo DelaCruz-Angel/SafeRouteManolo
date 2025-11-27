@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-<style>
-  * { box-sizing: border-box; margin:0; padding:0; font-family:'Poppins',sans-serif; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+              * { box-sizing: border-box; margin:0; padding:0; font-family:'Poppins',sans-serif; }
   body, html { 
     height: 100%; 
     width: 100%; 
@@ -168,129 +168,128 @@ margin-top: 20px;
   display: flex;
 }
 
+.posts-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
 
-  /* OVERVIEW HEADER */
-  .overview-header { margin-top:20px; font-size:1.5rem; font-weight:600; text-align:left; color: rgb(0, 0, 0); }
+.update-post {
+  background: #fff;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 100%; /* takes full width of parent (.posts-container) */
+  max-width: none; /* remove the previous max-width */
+}
 
-  /* HORIZONTAL SCROLL CARDS */
-  .scroll-wrapper {
-    display: flex;
-    gap: 20px;
-    overflow-x: auto;
-    padding: 15px 0;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    margin-top: 10px;
-    min-height: 200px;
-    flex-wrap: nowrap;
-  }
+.update-post img {
+  width: 100%; /* image will now span full post width */
+  height: 100%;
+  margin: 10px 0; /* spacing above/below image */
+  border-radius: 8px;
+}
 
-  .scroll-wrapper::-webkit-scrollbar { display: none; }
+.post-images {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto; /* allows horizontal scrolling */
+  padding: 5px 0;
+}
 
-  .data-card {
-    flex: 0 0 auto;
-    width: 280px;
-    background: white;
-    padding: 20px;
-    border-radius: 18px;
-    box-shadow: 0 10px 70px rgba(0,0,0,0.12);
-    scroll-snap-align: start;
-    transition: 0.25s ease;
-    display: flex;
-    gap: 15px;
-    position: relative;
-  }
+.post-images::-webkit-scrollbar {
+  height: 6px; /* small scrollbar height */
+}
 
-  .data-card:hover { transform: scale(1.04); }
+.post-images::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,0.3);
+  border-radius: 3px;
+}
 
-  .color-line {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 6px;
-    border-radius: 0 0 18px 18px;
-  }
+.post-images img {
+  flex: 0 0 auto; /* prevents shrinking */
+  width: 200px; /* smaller images */
+  height: 200px;
+  object-fit: cover; /* crop images nicely */
+  border-radius: 8px;
+}
 
-  .icon-box {
-    width: 50px;
-    height: 50px;
-    background: #dfe4ea;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-  .icon-box img { width: 45px; height: 45px; object-fit: cover; }
 
-  .text-box { flex: 1; }
-  .field-title { font-size: 13px; font-weight: bold; color: #444; margin-top: 3px; }
-  .field-value { font-size: 14px; color: #222; margin-bottom: 3px; }
 
-  /* CHART SECTION */
-  .chart-section { width: 100%; padding: 20px 0 0 0; margin-top: 20px; }
-  .chart-title { margin-bottom: 15px; font-size: 24px; font-weight: 700; color: #333; padding-left: 5px; }
-  .chart-layout { display: flex; gap: 20px; flex-wrap: wrap; }
 
-  .big-chart-box {
-    flex: 1;
-    min-width: 300px;
-    height: 400px;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
-    padding: 20px;
-    position: relative;
-  }
+.add-post-wrapper {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;  /* move to right side */
+  z-index: 100;
+}
 
-  .weather-box {
-    width: 260px;
-    min-width: 200px;
-    height: 400px;
-    background: rgb(47, 159, 110);
-    border-radius: 16px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
-    padding: 20px;
-  }
 
-  .placeholder-text { font-size: 14px; color: #ffffff; text-align: center; margin-top: 40%; }
+.add-post-icon {
+  font-size: 2rem;
+  width: 60px;
+  height: 60px;
+  background: #f6f6f6;
+  color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
 
-  /* Section title */
-  .section-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin: 20px 0 10px 0;
-    color: #000000;
-  }
+.add-post-popup {
+  position: absolute;
+  bottom: 70px; 
+  right: 0;
+  background: #fff;
+  padding: 20px; /* increase padding */
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  display: none; 
+  flex-direction: column;
+  gap: 12px; 
+  width: 300px; /* wider */
+  max-height: 1000px; /* taller popup */
+  overflow-y: auto; /* scroll if content exceeds height */
+}
 
-  /* News feed container */
-  .news-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    max-height: 500px;
-    overflow-y: auto;
-    padding-right: 10px;
-  }
 
-  .news-wrapper::-webkit-scrollbar { width: 6px; }
-  .news-wrapper::-webkit-scrollbar-thumb { background-color: rgba(0,0,0,0.2); border-radius: 3px; }
+.add-post-popup input,
+.add-post-popup textarea,
+.add-post-popup button {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+}
 
-  .news-post {
-    background: rgb(47, 159, 110);
-    border-radius: 12px;
-    padding: 15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    display: flex;
-    gap: 15px;
-    align-items: flex-start;
-  }
+.add-post-popup button {
+  background: #167740;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
 
-  .news-post img { width: 100px; height: 100px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
-  .news-text { flex: 1; }
-  .news-title { font-size: 16px; font-weight: 600; margin-bottom: 5px; color: #ffffff; }
-  .news-desc { font-size: 14px; color: #ffffff; line-height: 1.4; }
+.custom-file-input-small {
+  display: inline-block;
+  padding: 6px 12px; /* controls size */
+  font-size: 14px;
+  background-color: #167740; /* green background */
+  color: #fff;              /* white text */
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  font-weight: 500;
+  transition: background 0.3s ease;
+}
+
+.custom-file-input-small:hover {
+  background-color: #145c35; /* darker green on hover */
+}
+
 
 @media(max-width: 600px){
 
@@ -394,33 +393,9 @@ margin-top: 20px;
     border-bottom: none;
   }
 
-  /* Main content below sidebar */
-  .main {
-    flex: 1;
-    width: 100%;
-    padding: 10px;
-    margin-top: -41px;
-  }
-
-  .overview-box {
-    margin-top: 0;   /* or try 10px */
-}
 
 
-  /* Scroll cards & charts full width */
-  .scroll-wrapper, .big-chart-box, .weather-box, .news-wrapper {
-    width: 100%;
-  }
-
-  .data-card {
-    width: 220px; /* scroll horizontally */
-  }
-
-  .big-chart-box, .weather-box {
-    height: 300px;
-  }
-
-  @media(max-width: 600px){
+   @media(max-width: 600px){
   /* Container becomes vertical */
   .container { flex-direction: column; height: auto; }
 
@@ -439,38 +414,13 @@ margin-top: 20px;
   /* Top bar text smaller */
   .welcome-text { font-size: 0.85rem; }
   .search-container input { width: 80px; font-size: 0.8rem; padding: 6px 10px; }
-
-  /* Scroll cards smaller */
-  .data-card { width: 180px; padding: 12px; gap: 10px; }
-  .data-card .field-title { font-size: 11px; }
-  .data-card .field-value { font-size: 12px; }
-  .icon-box { width: 40px; height: 40px; }
-  .icon-box img { width: 35px; height: 35px; }
-  .color-line { height: 4px; border-radius: 0 0 12px 12px; }
-
-  /* Charts smaller */
-  .big-chart-box, .weather-box { height: 250px; padding: 15px; }
-  .chart-title { font-size: 18px; }
-
-  /* News posts smaller */
-  .news-wrapper { max-height: 300px; }
-  .news-post img { width: 80px; height: 80px; }
-  .news-title { font-size: 14px; }
-  .news-desc { font-size: 12px; line-height: 1.2; }
-
-  /* Section titles */
-  .overview-header, .section-title { font-size: 1.2rem; }
+}
 }
 
-}
-
-
-
-</style>
+    </style>
 </head>
 <body>
-
-<div class="container">
+      <div class="container">
 <div class="sidebar">
   <button class="hamburger" id="hamburgerBtn">☰</button>
 
@@ -480,9 +430,9 @@ margin-top: 20px;
 
   <div class="mobile-nav" id="mobileNav" style="display:none; flex-direction:column; position:absolute; top:60px; left:10px; background:white; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.15); z-index:100; overflow:hidden;">
     <a href="index.html">Home</a>
-    <a href="#">Dashboard</a>
+    <a href="dashboard.html">Dashboard</a>
     <a href="#">About</a>
-    <a href="map.html">Check Map</a>
+    <a href="#">Check Map</a>
     <a href="#">Updates</a>
     <a href="#">Contacts</a>
   </div>
@@ -514,9 +464,8 @@ margin-top: 20px;
 </nav>
 
   </div>
-  
 
-  <!-- MAIN -->
+   <!-- MAIN -->
   <div class="main">
     <!-- TOP BAR WITH BACKGROUND -->
     <div class="top-bar-wrapper">
@@ -538,36 +487,32 @@ margin-top: 20px;
       </div>
     </div>
 
-    <!-- OVERVIEW HEADER -->
-   <div class="overview-box">
-<div class="overview-header">Overview</div>
-<div class="scroll-wrapper" id="cardContainer"></div>
+<div class="updates-section">
+  <!-- Posts Container -->
+  <div id="postsContainer" class="posts-container"></div>
+
+  <!-- Add Post Button at Bottom Left -->
+  <div class="add-post-wrapper">
+    <div class="add-post-icon" id="addPostBtn">➕</div>
+    
+    <!-- Popup Form (hidden initially) -->
+    <div class="add-post-popup" id="addPostPopup">
+      <form id="postForm">
+        <input type="text" id="title" placeholder="Hazard Title" required>
+        <textarea id="desc" placeholder="Description" required></textarea>
+       <input type="file" id="images" multiple accept="image/*" style="display:none;">
+  <label for="images" class="custom-file-input-small">Choose Photos</label>
+        <button type="submit">Post</button>
+
+      </form>
+    </div>
+  </div>
 </div>
 
 
-<!-- RECENT CHART WRAPPED IN WHITE BOX -->
-<div class="chart-box">
-<h2 class="chart-title">Recent Chart</h2>
-<div class="chart-layout">
-<div class="big-chart-box">
-<p class="placeholder-text">📊 Bar Chart Goes Here</p>
-</div>
-<div class="weather-box">
-<p class="placeholder-text">☀️ Live Weather</p>
-</div>
-</div>
-</div>
 
-
-<!-- TOP NEWS WRAPPED IN WHITE BOX -->
-<div class="news-box">
-<h2 class="section-title">Top News</h2>
-<div class="news-wrapper" id="newsContainer"></div>
-</div>
-
-<script>
-
-  const hamburgerBtn = document.getElementById("hamburgerBtn");
+    <script>
+              const hamburgerBtn = document.getElementById("hamburgerBtn");
 const mobileNav = document.getElementById("mobileNav");
 
 // Show hamburger only on small screens
@@ -613,60 +558,74 @@ navLinks.forEach(link => {
   });
 });
 
+ const addPostBtn = document.getElementById("addPostBtn");
+const addPostPopup = document.getElementById("addPostPopup");
+const postForm = document.getElementById("postForm");
+const postsContainer = document.getElementById("postsContainer");
 
+let posts = [
+  {
+    title: "Fallen Tree",
+    desc: "Tree blocking the road near Barangay Central.",
+    images: [],
+    user: "Admin",
+    date: new Date().toLocaleString()
+  }
+];
 
-  const issueData = [
-    { location: "Zone 3 Riverside", issue: "Flooding", date: "2025-01-12", icon: "https://cdn-icons-png.flaticon.com/512/606/606797.png" },
-    { location: "Purok 5 Highway", issue: "Road Damage", date: "2025-01-14", icon: "https://cdn-icons-png.flaticon.com/512/854/854866.png" },
-    { location: "Sitio Mabini", issue: "Power Outage", date: "2025-01-20", icon: "https://cdn-icons-png.flaticon.com/512/3105/3105186.png" },
-    { location: "Crossing Delta", issue: "Fallen Tree", date: "2025-01-21", icon: "https://cdn-icons-png.flaticon.com/512/616/616489.png" },
-        { location: "Crossing Delta", issue: "Fallen Tree", date: "2025-01-21", icon: "https://cdn-icons-png.flaticon.com/512/616/616489.png" },
-            { location: "Crossing Delta", issue: "Fallen Tree", date: "2025-01-21", icon: "https://cdn-icons-png.flaticon.com/512/616/616489.png" }
-  ];
+// Toggle popup visibility
+addPostBtn.addEventListener("click", () => {
+  addPostPopup.style.display = addPostPopup.style.display === "flex" ? "none" : "flex";
+});
 
-  const colors = ["#ff7675", "#74b9ff", "#55efc4", "#ffeaa7", "#fab1a0"];
-  const container = document.getElementById("cardContainer");
-
-  issueData.forEach((data, i) => {
-    const card = document.createElement("div");
-    card.className = "data-card";
-    const randomColor = colors[i % colors.length];
-
-    card.innerHTML = `
-      <div class="icon-box"><img src="${data.icon}"></div>
-      <div class="text-box">
-        <div class="field-title">Location:</div>
-        <div class="field-value">${data.location}</div>
-        <div class="field-title">Issue:</div>
-        <div class="field-value">${data.issue}</div>
-        <div class="field-title">Date:</div>
-        <div class="field-value">${data.date}</div>
-      </div>
-      <div class="color-line" style="background: ${randomColor}"></div>
-    `;
-    container.appendChild(card);
-  });
-
-  const newsData = [
-    { title: "Flood hits Riverside area", description: "Heavy rains caused flooding in Zone 3 Riverside, residents advised to stay indoors.", image: "https://cdn-icons-png.flaticon.com/512/414/414927.png" },
-    { title: "Highway road damage reported", description: "Purok 5 Highway has several potholes after recent landslides.", image: "https://cdn-icons-png.flaticon.com/512/854/854866.png" },
-    { title: "Power outage in Sitio Mabini", description: "Electricity has been disrupted due to fallen lines. Repairs ongoing.", image: "https://cdn-icons-png.flaticon.com/512/3105/3105186.png" }
-  ];
-
-  const newsContainer = document.getElementById("newsContainer");
-  newsData.forEach(item => {
-    const post = document.createElement("div");
-    post.className = "news-post";
-    post.innerHTML = `
-      <img src="${item.image}" alt="${item.title}">
-      <div class="news-text">
-        <div class="news-title">${item.title}</div>
-        <div class="news-desc">${item.description}</div>
+// Render posts
+function renderPosts() {
+  postsContainer.innerHTML = "";
+  posts.forEach(post => {
+    const postDiv = document.createElement("div");
+    postDiv.classList.add("update-post");
+    postDiv.innerHTML = `
+      <strong>${post.user}</strong> <span style="float:right">${post.date}</span>
+      <h4>${post.title}</h4>
+      <p>${post.desc}</p>
+      <div class="post-images">
+        ${post.images.map(img => `<img src="${img}" alt="hazard">`).join("")}
       </div>
     `;
-    newsContainer.appendChild(post);
+    postsContainer.appendChild(postDiv);
   });
+}
+
+// Handle form submission
+postForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const title = document.getElementById("title").value;
+  const desc = document.getElementById("desc").value;
+  const imageFiles = document.getElementById("images").files;
+
+  const images = [];
+  for (let i = 0; i < imageFiles.length; i++) {
+    images.push(URL.createObjectURL(imageFiles[i])); // create temporary preview
+  }
+
+  posts.unshift({
+    title,
+    desc,
+    images,
+    user: "You",
+    date: new Date().toLocaleString()
+  });
+
+  renderPosts();
+  postForm.reset();
+  addPostPopup.style.display = "none"; // hide popup after submit
+});
+
+// Initial render
+renderPosts();
+
+
 </script>
-
 </body>
 </html>
