@@ -10,13 +10,20 @@
   body, html { 
     height: 100%; 
     width: 100%; 
-    background: url("https://i.pinimg.com/1200x/db/be/f2/dbbef2427bac57f91da654fafc659546.jpg") no-repeat center center;
+    background: url("https://i.pinimg.com/736x/18/a8/e1/18a8e19beb25ebbe7bd600911000c4bc.jpg");
     background-size: cover; /* Makes the image cover the entire screen */
     background-attachment: fixed; /* Optional: keeps it fixed on scroll */
 }
 
-.overview-box,
-.chart-box,
+
+.chart-box{
+  background: #8fbc8f ;
+padding: 20px;
+border-radius: 16px;
+box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+margin-top: 20px;
+
+}
 .news-box {
 background: rgb(255, 255, 255);
 padding: 20px;
@@ -30,20 +37,20 @@ margin-top: 20px;
   /* LEFT SIDEBAR */
   .sidebar {
     width: 220px; 
-    background: url("/ICONS/nav.jpg"); 
+    background-color: #242124 ; 
     color:rgb(161, 156, 118);
     display:flex; flex-direction:column; padding-top:20px; position:relative;
   }
 
   .sidebar .logo { text-align:center; margin-bottom:20px; }
-  .sidebar .logo img { width:120px; border-radius:10px;  width:120px; 
+  .sidebar .logo img { width:120px; border-radius:10px;  width:180px; 
     border-radius:10px; }
 
  /* SIDEBAR NAV LINKS */
 .sidebar nav a {
   display: block;
   padding: 15px 20px;
-  color: rgb(0, 0, 0);
+  color: rgb(255, 255, 255);
   text-decoration: none;
   margin-bottom: 5px;
   border-radius: 5px;
@@ -52,7 +59,7 @@ margin-top: 20px;
 
 /* Hover effect only */
 .sidebar nav a:hover {
-  background-color: rgb(226, 218, 185); /* light highlight */
+  background-color: #838383; /* light highlight */
   transform: scale(1.03); /* optional: subtle zoom */
 }
 
@@ -60,7 +67,7 @@ margin-top: 20px;
     width: 20px;
     height: 17px;
     margin-right: 10px;
-    filter: brightness(0) saturate(100%) invert(0%) sepia(0%) saturate(0%) hue-rotate(0deg);
+    color: #1e4d2b;
     /* This makes the SVG black — change below to recolor */
 }
 
@@ -96,7 +103,7 @@ margin-top: 20px;
     align-items: center;
     margin-bottom: 20px;
     position: relative;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
   }
 
   .top-bar {
@@ -175,7 +182,7 @@ margin-top: 20px;
   /* HORIZONTAL SCROLL CARDS */
   .scroll-wrapper {
     display: flex;
-    gap: 20px;
+    gap: 10px;
     overflow-x: auto;
     padding: 15px 0;
     scroll-snap-type: x mandatory;
@@ -190,10 +197,9 @@ margin-top: 20px;
   .data-card {
     flex: 0 0 auto;
     width: 280px;
-    background: white;
+    background: rgb(255, 255, 255);
     padding: 20px;
     border-radius: 18px;
-    box-shadow: 0 10px 70px rgba(0,0,0,0.12);
     scroll-snap-align: start;
     transition: 0.25s ease;
     display: flex;
@@ -248,7 +254,7 @@ margin-top: 20px;
     width: 260px;
     min-width: 200px;
     height: 400px;
-    background: rgb(47, 159, 110);
+    background: #1e4d2b;
     border-radius: 16px;
     box-shadow: 0 4px 14px rgba(0,0,0,0.1);
     padding: 20px;
@@ -278,7 +284,7 @@ margin-top: 20px;
   .news-wrapper::-webkit-scrollbar-thumb { background-color: rgba(0,0,0,0.2); border-radius: 3px; }
 
   .news-post {
-    background: rgb(47, 159, 110);
+    background: #ffffff;
     border-radius: 12px;
     padding: 15px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.1);
@@ -289,8 +295,8 @@ margin-top: 20px;
 
   .news-post img { width: 100px; height: 100px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
   .news-text { flex: 1; }
-  .news-title { font-size: 16px; font-weight: 600; margin-bottom: 5px; color: #ffffff; }
-  .news-desc { font-size: 14px; color: #ffffff; line-height: 1.4; }
+  .news-title { font-size: 16px; font-weight: 600; margin-bottom: 5px; color: #000000; }
+  .news-desc { font-size: 14px; color: #595959; line-height: 1.4; }
 
 @media(max-width: 600px){
 
@@ -475,7 +481,7 @@ margin-top: 20px;
   <button class="hamburger" id="hamburgerBtn">☰</button>
 
   <div class="logo">
-    <img src="/ICONS/LOGS.png" alt="Logo">
+    <img src="/ICONS/newlog.png" alt="Logo">
   </div>
 
   <div class="mobile-nav" id="mobileNav" style="display:none; flex-direction:column; position:absolute; top:60px; left:10px; background:white; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.15); z-index:100; overflow:hidden;">
@@ -496,15 +502,15 @@ margin-top: 20px;
     <img src="/ICONS/DASHBOARD.svg" class="nav-icon"> Dashboard
   </a>
 
-  <a href="#" data-page="about">
+  <a href="about.html" data-page="about">
     <img src="/ICONS/ABOUT.svg" class="nav-icon"> About
   </a>
 
-  <a href="#" data-page="checkmap">
+  <a href="map.html" data-page="checkmap">
     <img src="/ICONS/CHECK.svg" class="nav-icon"> Check Map
   </a>
 
-  <a href="#" data-page="updates">
+  <a href="updates.html" data-page="updates">
     <img src="/ICONS/UPDATES.svg" class="nav-icon"> Updates
   </a>
 
@@ -526,7 +532,7 @@ margin-top: 20px;
           <input type="text" placeholder="Search here...">
         </div>
         <div class="profile dropdown">
-  <img src="https://i.pinimg.com/736x/53/84/a6/5384a6e9cf74a52248aa9714951f04d1.jpg" alt="Profile">
+  <img src="https://i.pinimg.com/736x/d9/7b/bb/d97bbb08017ac2309307f0822e63d082.jpg" alt="Profile">
   <span class="dropdown-arrow">▼</span>
 
   <div class="dropdown-menu">
