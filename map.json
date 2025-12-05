@@ -1,0 +1,23 @@
+[
+  {
+    "name": "Manolo Fortich Municipal Hall",
+    "lng": 124.8643,
+    "lat": 8.3695,
+    "description": "The main government administrative building.",
+    "image": "municipal_hall.jpg"
+  },
+  {
+    "name": "Flooding Incident",
+    "lng": 124.8580,
+    "lat": 8.3750,
+    "description": "Area currently experiencing flash flooding due to heavy rain.",
+    "image": "flood_alert.png"
+  },
+  {
+    "name": "Local Park Entrance",
+    "lng": 124.8615,
+    "lat": 8.3720,
+    "description": "Public park entrance, good for recreational activities.",
+    "image": "park_icon.svg"
+  }
+]
