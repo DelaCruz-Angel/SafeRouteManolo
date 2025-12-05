@@ -1,0 +1,62 @@
+[
+  {
+    "id": 1,
+    "title": "Marker A",
+    "location": "City Center",
+    "description": "This is a test marker.",
+    "lat": "8.367674",
+    "lng": "124.865718",
+    "image": "https://i.pinimg.com/1200x/ff/e3/46/ffe3462236fa97e4d2c7662b1076c84e.jpg",
+    "severity": "High"
+  },
+  {
+    "id": 2,
+    "title": "Marker B",
+    "location": "River Side",
+    "description": "Another location.",
+    "lat": "8.367653",
+    "lng": "124.866389",
+    "image": "https://i.pinimg.com/736x/f9/d3/86/f9d38641bc1eb44efcd402970d747bc3.jpg",
+    "severity": "Medium"
+  },
+  {
+    "id": 3,
+    "title": "Marker C",
+    "location": "River Side",
+    "description": "Another location.",
+    "lat": "8.367664",
+    "lng": "124.865751",
+    "image": "https://i.pinimg.com/736x/f9/d3/86/f9d38641bc1eb44efcd402970d747bc3.jpg",
+    "severity": "Low"
+  },
+  {
+    "id": 4,
+    "title": "Marker D",
+    "location": "River Side",
+    "description": "Another location.",
+    "lat": "8.367371",
+    "lng": "124.865617",
+    "image": "https://i.pinimg.com/736x/f9/d3/86/f9d38641bc1eb44efcd402970d747bc3.jpg",
+    "severity": "High"
+  },
+  {
+    "id": 5,
+    "title": "Marker E",
+    "location": "River Side",
+    "description": "Another location.",
+    "lat": "8.367679",
+    "lng": "124.865287",
+    "image": "https://i.pinimg.com/736x/f9/d3/86/f9d38641bc1eb44efcd402970d747bc3.jpg",
+    "severity": "High"
+  },
+   {
+    "id": 6,
+    "title": "Marker E",
+    "location": "River Side",
+    "description": "Another location.",
+    "lat": "8.367679",
+    "lng": "124.865287",
+    "image": "https://i.pinimg.com/736x/f9/d3/86/f9d38641bc1eb44efcd402970d747bc3.jpg",
+    "severity": "High"
+  }
+]

@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+ * { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #fff;
+  color: #000;
+}
+
+/* Header */
+header {
+  background-color: #ffffff;
+  border-bottom: 1px solid #b5b5b5;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* Container */
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 16px 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo */
+.logo {
+  font-family: "Gadugi", "Segoe UI", Arial, sans-serif;
+  font-size: 1.8rem;
+  font-weight: 600;
+  color: #000;
+  text-decoration: none;
+  display: flex;
+  gap: 0px;
+}
+.logo-icon { width: 40px; height: 40px; border-radius: 8px; }
+
+/* Nav */
+nav { display: flex; gap: 18px; }
+.nav-links { display: flex; gap: 18px; }
+.nav-links a {
+  text-decoration: none;
+  color: #000;
+  padding: 12px 17px;
+  font-weight: 500;
+  font-size: 16px;
+  transition: color 0.2s ease;
+}
+.nav-links a:hover { color: rgb(223, 65, 223); }
+
+/* Profile */
+.profile { display: flex; align-items: center; gap: 6px; }
+.profile img { width: 30px; height: 30px; border-radius: 50%; }
+
+/* Dropdown */
+.dropdown { position: relative; display: flex; align-items: center; gap: 6px; cursor: pointer; }
+.dropdown-arrow { font-size: 14px; color: #000; }
+.dropdown-menu {
+  position: absolute;
+  top: 60px;
+  right: 0;
+  width: 200px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  display: none;
+  flex-direction: column;
+  z-index: 20;
+}
+.dropdown-menu.show { display: flex; }
+.dropdown-item { padding: 12px; font-size: 14px; border-bottom: 1px solid #eee; color: #333; }
+.dropdown-item.logout { color: red; font-weight: bold; }
+
+.mobile-menu-button {
+  display: none; /* desktop hidden */
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+
+  /* Container padding */
+  .container {
+    padding: 30px 12px;
+    position: relative;
+  }
+
+  /* Hamburger smaller and lower */
+ /* Mobile hamburger color */
+.mobile-menu-button {
+    display: block;
+    font-size: 20px;
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 1200; /* higher than nav and map controls */ /* higher than logo */
+    color: rgb(223, 65, 223);
+    background: none;
+    border: none;
+    cursor: pointer;
+}
+
+.logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 1rem;
+    z-index: 100; /* lower than hamburger */
+}
+
+
+  .logo-icon {
+    width: 30px;
+    height: 30px;
+  }
+
+  /* Profile smaller */
+  .profile {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    gap: 4px;
+    z-index: 1002;
+  }
+
+  .profile img {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Dropdown move slightly up */
+  .dropdown-menu {
+    top: 50px; /* reduce from 60px to move it up */
+    right: 0;
+    width: 300px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    display: none;
+    flex-direction: column;
+    z-index: 1200; /* above other elements */
+  }
+
+  .dropdown-menu.show { display: flex; }
+
+  /* Nav slides from left */
+  .nav-links {
+    position: fixed;
+    top: 0;
+    left: -100%;
+    width: 220px;
+    height: 100vh;
+    background-color: #1e1e2f;
+    flex-direction: column;
+    padding-top: 60px;
+    gap: 10px;
+    transition: left 0.3s ease;
+    z-index: 2000;
+  }
+
+  .nav-links a {
+    color: #fff;
+    font-size: 14px;
+    padding: 10px 16px;
+  }
+
+.nav-links.open {
+    left: 0;
+    z-index: 1100; /* higher than Leaflet controls */
+}
+
+}
+
+
+  #mobileNav a {
+    padding: 12px 20px;
+    border-bottom: 1px solid #eee;
+    color: #000;
+    font-weight: 500;
+    text-decoration: none;
+  }
+
+  #mobileNav a:last-child {
+    border-bottom: none;
+  }
+
+  /* Main content below sidebar */
+  .main {
+    flex: 1;
+    width: 100%;
+    padding: 10px;
+    margin-top: -41px;
+  }
+
+
+    </style>
+</head>
+<body>  
+<header>
+  <div class="container">
+    <!-- Logo -->
+    <a href="#" class="logo">
+      <img src="/ICONS/purp.png" class="logo-icon">
+      <span style="color: rgb(223, 65, 223); font-weight: 900;">S</span>afeRouteManolo
+    </a>
+
+    <!-- Desktop nav -->
+    <nav>
+      <div class="nav-links" id="navLinks">
+        <a href="index.html">Home</a>
+        <a href="dashboard.html">Dashboard</a>
+        <a href="map.html">Checkmap</a>
+        <a href="updates.html">Updates</a>
+        <a href="about.html">About</a>
+        <a href="contacts.html">Contact</a>
+      </div>
+      <!-- Hamburger for mobile -->
+      <button class="mobile-menu-button" id="mobileBtn">☰</button>
+    </nav>
+
+    <!-- Profile -->
+    <div class="profile dropdown">
+      <img src="https://i.pinimg.com/736x/36/9a/2d/369a2d86c511f24fe51ced8f29d6ae6e.jpg">
+      <span class="dropdown-arrow">▼</span>
+
+    <div class="dropdown-menu">
+    <div class="dropdown-item" id="displayUsername">Full Name</div>
+    <div class="dropdown-item logout">Logout</div>
+</div>
+
+    </div>
+  </div>
+</header>
+
+    <script>
+const mobileBtn = document.getElementById('mobileBtn');
+const navLinks = document.getElementById('navLinks');
+
+mobileBtn.addEventListener('click', () => {
+  navLinks.classList.toggle('open');
+  mobileBtn.textContent = navLinks.classList.contains('open') ? '✖' : '☰';
+});
+
+const dropdown = document.querySelector(".dropdown");
+const dropdownMenu = document.querySelector(".dropdown-menu");
+
+dropdown.addEventListener("click", () => {
+  dropdownMenu.classList.toggle("show");
+});
+
+document.addEventListener("click", (e) => {
+  if (!dropdown.contains(e.target)) {
+    dropdownMenu.classList.remove("show");
+  }
+});
+
+
+
+// Select the logout button
+const logoutBtn = document.querySelector('.dropdown-item.logout');
+
+// Add click event
+logoutBtn.addEventListener('click', () => {
+  // Optional: Clear saved user from localStorage if you want to "log out" completely
+  localStorage.removeItem('user');
+
+  // Redirect to login page (or any page you want)
+  window.location.href = 'index.html';
+});
+
+
+// Wait until DOM is fully loaded
+document.addEventListener("DOMContentLoaded", () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    if (!user) {
+        console.log("No user found in localStorage");
+        return;
+    }
+
+    // Uppercase first name
+    const firstName = user.firstName ? user.firstName.toUpperCase() : "";
+    // Middle initial with dot
+    const middleInitial = user.mi ? user.mi.charAt(0).toUpperCase() + "." : "";
+    // Uppercase last name
+    const lastName = user.lastName ? user.lastName.toUpperCase() : "";
+
+    // Combine
+    const fullName = `${firstName} ${middleInitial} ${lastName}`.trim();
+
+    // Update dropdown
+    const display = document.getElementById("displayUsername");
+    if (display) {
+        display.textContent = fullName;
+    } else {
+        console.log("displayUsername div NOT found");
+    }
+});
+
+
+    </script>
+   
+</body>
+</html>
