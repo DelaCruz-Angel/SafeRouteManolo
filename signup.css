@@ -1,0 +1,330 @@
+/* -----------------------------------------
+  ROOT VARIABLES AND GLOBAL STYLES
+------------------------------------------ */
+:root {
+  --primary-green: #38a169; 
+  --dark-green: #2c7750;
+  --light-bg: #f7f9f9;
+  --text-dark: #2c3e50; 
+  --text-light: #7f8c8d;
+  --input-bg: #f0f4f5;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
+
+/* LEFT SIDE - SLIDER */
+.left {
+  flex: 1.2; 
+  position: relative;
+  overflow: hidden;
+  box-shadow: 4px 0 10px rgba(0, 0, 0, 0.1); 
+}
+
+.left .logo {
+  position: absolute;
+  top: 30px;
+  left: 30px;
+  width: 160px;
+  z-index: 10;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4)); 
+}
+
+.overlay {
+  position: absolute;
+  top: 0; left: 0; width: 100%; height: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,0.5), rgba(0,0,0,0.1)); 
+  z-index: 2;
+}
+
+.slider {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.slide {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 1s ease-in-out; 
+  transform: scale(1.05); 
+}
+
+.slide.active {
+  opacity: 1;
+  transform: scale(1);
+  transition: opacity 1.5s ease-in-out, transform 8s linear; 
+}
+
+/* RIGHT SIDE - FORM */
+.right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 40px 60px;
+  background: #ffffff;
+  overflow-y: auto;
+  position: relative;
+}
+
+.form-wrapper {
+  max-width: 450px; 
+  width: 100%;
+  margin: 0 auto;
+  animation: fadeUp 0.8s ease-out forwards;
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+@keyframes fadeUp {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.welcome-text {
+  font-size: 2.5rem; 
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 5px;
+  letter-spacing: -1px;
+}
+
+.sub-text {
+  font-size: 1rem;
+  color: var(--text-light);
+  margin-bottom: 40px;
+}
+
+/* INPUT STYLING */
+.input-group {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.input-group label {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: 6px;
+  margin-left: 2px;
+}
+
+/* Icon inside the input field (left side) */
+.input-group > i:not(.password-toggle):not(.validation-icon) { 
+    position: absolute;
+    left: 18px;
+    top: 48px; 
+    color: var(--text-light);
+    font-size: 1rem;
+    transition: color 0.3s;
+    pointer-events: none; 
+}
+
+/* Password Toggle Button Styling (far right) */
+.password-toggle {
+    position: absolute;
+    right: 15px; 
+    top: 48px; 
+    color: var(--text-light);
+    font-size: 1rem;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+.password-toggle:hover {
+    color: var(--primary-green);
+}
+
+/* Input text box */
+input {
+  width: 100%;
+  padding: 15px 15px 15px 45px; /* Padding for left icon */
+  background-color: var(--input-bg);
+  border: 1px solid #e0e6e9; 
+  border-radius: 10px;
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  transition: all 0.3s ease;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.05); 
+}
+
+input:focus {
+  background-color: #fff;
+  border-color: var(--primary-green);
+  box-shadow: 0 0 0 3px rgba(56, 161, 105, 0.2), inset 0 1px 3px rgba(0,0,0,0.05);
+  outline: none;
+}
+
+/* Change icon color on focus */
+.input-group:focus-within > i,
+.input-group:focus-within .password-toggle {
+    color: var(--primary-green);
+}
+
+input::placeholder {
+  color: #b0b0b0;
+}
+
+/* 3-Column Row for Name */
+.input-row {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+}
+
+/* Remove icon padding for the tiny MI field */
+.input-group.tiny input {
+  padding: 15px;
+  text-align: center;
+}
+
+.input-group.small { flex: 2; }
+.input-group.tiny { flex: 1; }
+
+/* BUTTON STYLING */
+button.signup-btn {
+  width: 100%;
+  padding: 18px; 
+  margin-top: 25px; 
+  background: linear-gradient(135deg, var(--primary-green), var(--dark-green));
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 1px; 
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+  box-shadow: 0 8px 15px rgba(56, 161, 105, 0.3);
+}
+
+button.signup-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 25px rgba(56, 161, 105, 0.45);
+  filter: brightness(1.05);
+}
+
+button.signup-btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(56, 161, 105, 0.3);
+}
+
+/* SIGN IN LINK */
+.signin-text {
+  text-align: center;
+  margin-top: 30px;
+  font-size: 0.95rem;
+  color: var(--text-light);
+}
+
+.signin-text a {
+  color: var(--primary-green);
+  text-decoration: none;
+  font-weight: 700;
+  transition: color 0.2s;
+}
+
+.signin-text a:hover {
+  color: var(--dark-green);
+  text-decoration: none; 
+}
+
+/* -----------------------------------------
+  VALIDATION AND FEEDBACK STYLES
+------------------------------------------ */
+.input-group.error input {
+    border-color: #e74c3c; /* Red border for errors */
+}
+
+.input-group.success input {
+    border-color: var(--primary-green); /* Green border for success */
+}
+
+/* Icon for checkmark/X */
+.validation-icon {
+    position: absolute;
+    right: 40px; /* Positioned to the left of the password toggle (15px + 25px spacing) */
+    top: 48px; 
+    font-size: 1rem;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 10;
+}
+
+.input-group.success .validation-icon.check {
+    color: var(--primary-green);
+    opacity: 1;
+}
+
+.input-group.error .validation-icon.times {
+    color: #e74c3c; /* Red */
+    opacity: 1;
+}
+
+/* Hide the default input left icon on success/error to allow the validation icon to stand out */
+.input-group.error > i:not(.password-toggle):not(.validation-icon),
+.input-group.success > i:not(.password-toggle):not(.validation-icon) {
+    opacity: 0;
+}
+
+.error-message {
+    color: #e74c3c;
+    font-size: 0.75rem;
+    margin-top: 4px;
+    margin-left: 2px;
+    font-weight: 500;
+    height: 18px; /* Reserves space to prevent layout shifting */
+}
+
+/* -----------------------------------------
+  MOBILE RESPONSIVE DESIGN
+------------------------------------------ */
+@media (max-width: 900px) {
+  .container { flex-direction: column; height: auto; }
+  .left { display: none; }
+
+  .right {
+    width: 100%;
+    padding: 30px 20px;
+    min-height: 100vh; 
+  }
+
+  .form-wrapper::before {
+    content: "";
+    display: block;
+    background: url('/ICONS/LOGS.png') no-repeat center;
+    background-size: contain;
+    width: 100px; 
+    height: 100px;
+    margin: 0 auto 10px auto;
+  }
+
+  .welcome-text { text-align: center; font-size: 2rem; }
+  .sub-text { text-align: center; margin-bottom: 25px; }
+
+  .input-row { flex-direction: column; gap: 0; }
+  .input-group.tiny input { text-align: left; padding-left: 45px; } 
+  
+  .input-group > i, .password-toggle, .validation-icon { top: 46px; } 
+}
