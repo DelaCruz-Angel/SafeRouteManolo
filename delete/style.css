@@ -1,0 +1,202 @@
+/* Reset default spacing */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Logo inside sidebar */
+
+/* Sidebar */
+.sidebar {
+  width: 220px;
+  background: #000000;
+  opacity: 80%;
+  color: rgb(0, 0, 0);
+  flex-direction: column;
+  height: 100vh; /* full height */
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+ .sidebar .logo {
+      text-align: center;
+      padding: 20px;
+    }
+
+    .sidebar .logo img {
+      max-width: 80%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+
+/* Navbar links below logo */
+.nav-links {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-top: 15px;
+  padding: 0;
+}
+.nav-links a {
+  display: flex;
+  align-items: center;
+  gap: 10px;      /* space between icon and text */
+  padding: 15px 10px;
+  color: white;   /* this also colors the SVGs using currentColor */
+  text-decoration: none;
+  font-size: 18px;
+  border-radius: 0;
+}
+
+.nav-links a:hover {
+  background: #2dba42;
+}
+
+.icon {
+  width: 20px;   /* adjust icon size */
+  height: 20px;
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+}
+
+
+.dropdown {
+  position: fixed;       /* fixed to the viewport */
+  top: 15px;             /* distance from top */
+  right: 15px;           /* distance from right */
+  z-index: 2000;
+}
+
+.dropdown-btn {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  user-select: none;
+  background: white;       /* visible button */
+}
+
+.profile-pic {
+  pointer-events: none;
+}
+
+.arrow {
+  transition: transform 0.25s ease;
+  font-size: 14px;
+}
+
+.arrow.rotate {
+  transform: rotate(180deg);
+}
+
+/* Dropdown menu opens below the button */
+.dropdown-content {
+  position: absolute;   /* relative to button */
+  right: 0;             /* aligns to right of button */
+  top: 50px;            /* below the button */
+  min-width: 160px;
+  background: white;
+  border-radius: 6px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  opacity: 0;
+  transform: translateY(-5px);
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.dropdown-content.active {
+  opacity: 1;
+  transform: translateY(0px);
+  pointer-events: auto;
+}
+
+.dropdown-content a {
+  display: block;
+  padding: 10px;
+  color: black;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.dropdown-content a:hover {
+  background: rgba(0,0,0,0.1);
+}
+
+
+
+    /* Content */
+    .content {
+      margin-left: 300px;
+      padding: 20px;
+      flex: 1;
+    }
+
+    /* Mobile Responsive */
+   .menu-btn {
+  display: none;
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: #fffefe;
+  padding: 10px 15px;
+  border: none;
+  font-size: 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  z-index: 2000;
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  /* Hide sidebar by default */
+  .sidebar {
+    transform: translateX(-100%);
+    position: fixed;
+    z-index: 1000;
+    height: 100vh;
+  }
+
+  /* Show sidebar when active */
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  /* Top bar for mobile */
+  .top-bar {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 60px;
+    background: #fff;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 15px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    z-index: 2000;
+  }
+
+  /* Order items in top bar */
+  .top-bar .dropdown { order: 1; }
+  .top-bar .logo-img { order: 2; max-height: 40px; }
+  .top-bar .menu-btn { order: 3; font-size: 24px; }
+
+  /* Hide dropdown in content on mobile */
+  .content .dropdown {
+    display: none;
+  }
+
+  /* Content below top bar */
+  .content {
+    margin-left: 0;
+    margin-top: 60px;
+  }
+}

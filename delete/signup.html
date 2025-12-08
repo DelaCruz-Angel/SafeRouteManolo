@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Create Account</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+
+    .container {
+      display: flex;
+      height: 100vh;
+      width: 100vw;
+    }
+
+    .left {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Fixed logo on top-left */
+    .left .logo {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      width: 150px;
+      z-index: 10;
+    }
+
+    /* Slider Styles */
+    .slider {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .slide {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .slide.active {
+      opacity: 1;
+    }
+
+    .right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 50px 40px;
+      background: #ffffff;
+      overflow: auto;
+      padding-top: 10px;
+    }
+
+    .welcome-text {
+      font-size: 2rem;
+      font-weight: 600;
+      margin-bottom: 10px;
+      margin-top: 50px; /* FIX ADDED */
+    }
+
+    .sub-text {
+      font-size: 1rem;
+      color: #555;
+      margin-bottom: 30px;
+    }
+
+    .input-group {
+      margin-bottom: 20px;
+    }
+
+    input {
+      width: 100%;
+      padding: 12px 15px;
+      margin-top: 5px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .input-row {
+  display: flex;
+  gap: 15px;
+  width: 100%;
+}
+
+.input-group.small {
+  flex: 1;
+}
+
+.input-group.tiny {
+  width: 80px;
+}
+
+button.signup-btn {
+  width: 100%;
+  padding: 12px;
+  background: #167740;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+button.signup-btn:hover {
+  background: #1d701f;
+}
+
+.signin-text {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.signin-text a {
+  color: #167740;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.signin-text a:hover {
+  text-decoration: underline;
+}
+
+/* -----------------------------------------
+   MOBILE RESPONSIVE DESIGN – FOR CREATE ACCOUNT PAGE
+------------------------------------------ */
+@media (max-width: 900px) {
+
+  /* Stack the full layout */
+  .container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  /* Hide the left slider panel */
+  .left {
+    display: none;
+  }
+
+  /* Right panel becomes full width */
+  .right {
+    width: 100%;
+    height: auto;
+    padding: 20px 25px;
+    justify-content: flex-start;
+    padding-top: 10px;
+  }
+
+  /* Add logo above the form on mobile */
+  .right::before {
+    content: "";
+    display: block;
+    background: url('/ICONS/LOGS.png') no-repeat center;
+    background-size: contain;
+    width: 160px;
+    height: 160px;
+    margin: 0 auto 25px auto;
+  }
+
+  /* Shrink heading text */
+  .welcome-text {
+    font-size: 1.5rem;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  /* Shrink subtext */
+  .sub-text {
+    font-size: 0.9rem;
+    text-align: center;
+  }
+
+  /* Input labels */
+  .input-group label {
+    font-size: 0.85rem;
+  }
+
+  /* Input text */
+  input {
+    font-size: 0.9rem;
+  }
+
+  /* Adjust 3-column name row (First | Last | MI) */
+  .input-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .input-group.small,
+  .input-group.tiny {
+    width: 100%;
+  }
+
+  /* Sign in text */
+  .signin-text {
+    font-size: 0.85rem;
+    text-align: center;
+  }
+}
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+<div class="left">
+  <img src="/ICONS/LOGS.png" alt="Logo" class="logo">
+
+  <div class="slider">
+    <img src="https://i.pinimg.com/736x/31/31/6a/31316af172d5c1078ed778a00c51a29c.jpg" class="slide active">
+    <img src="https://i.pinimg.com/736x/df/77/7c/df777cf2f0efc93c55508345c90e469e.jpg" class="slide">
+    <img src="https://i.pinimg.com/736x/fe/11/a9/fe11a99c932781b5326aaaa8771796e0.jpg" class="slide">
+  </div>
+</div>
+
+
+
+  <div class="right">
+    <h1 class="welcome-text">Create Account</h1>
+    <p class="sub-text">Fill in the information below</p>
+
+    <!-- FIRST NAME | LAST NAME | MI -->
+    <div class="input-row">
+      <div class="input-group small">
+        <label>First Name</label>
+        <input type="text">
+      </div>
+
+      <div class="input-group small">
+        <label>Last Name</label>
+        <input type="text">
+      </div>
+
+      <div class="input-group tiny">
+        <label>MI</label>
+        <input type="text" maxlength="1">
+      </div>
+    </div>
+
+
+    <!-- EMAIL -->
+    <div class="input-group">
+      <label>Email</label>
+      <input type="email">
+    </div>
+
+  <!-- PASSWORD -->
+<div class="input-group password-group">
+  <label>Password</label>
+  <div style="position: relative;">
+    <input type="password" id="password">
+    <span class="toggle-password" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); cursor:pointer;">👁️</span>
+  </div>
+</div>
+
+<!-- CONFIRM PASSWORD -->
+<div class="input-group password-group">
+  <label>Confirm Password</label>
+  <div style="position: relative;">
+    <input type="password" id="confirmPassword">
+    <span class="toggle-password" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); cursor:pointer;">👁️</span>
+  </div>
+</div>
+
+<!-- Success message -->
+<p id="signupMessage" style="text-align:center; color:green; font-weight:600; margin-top:10px;"></p>
+
+
+    <!-- SIGN UP BUTTON -->
+    <button class="signup-btn">Sign Up</button>
+
+    <!-- SIGN IN LINK -->
+    <p class="signin-text">
+      Already have an account?
+      <a href="index.html">Sign in</a>
+    </p>
+
+  </div>
+</div>
+
+<!-- SLIDER SCRIPT -->
+<script>
+let slides = document.querySelectorAll('.slide');
+let index = 0;
+
+setInterval(() => {
+  slides[index].classList.remove('active');
+  index = (index + 1) % slides.length;
+  slides[index].classList.add('active');
+}, 3000);
+
+class User {
+  #firstName;
+  #lastName;
+  #mi;
+  #email;
+  #password;
+
+  constructor(firstName, lastName, mi, email, password) {
+    this.#firstName = firstName;
+    this.#lastName = lastName;
+    this.#mi = mi;
+    this.#email = email;
+    this.#password = password;
+  }
+
+  getEmail() { return this.#email; }
+  checkPassword(password) { return this.#password === password; }
+  toJSON() {
+    return {
+      firstName: this.#firstName,
+      lastName: this.#lastName,
+      mi: this.#mi,
+      email: this.#email,
+      password: this.#password
+    };
+  }
+  saveToStorage() { localStorage.setItem('user', JSON.stringify(this.toJSON())); }
+}
+
+// Elements
+const signupBtn = document.querySelector('.signup-btn');
+const signupMessage = document.getElementById('signupMessage');
+
+// Only allow letters for names
+document.querySelectorAll('input[type="text"]').forEach((input, index) => {
+  if(index <= 2){
+    input.addEventListener('input', () => {
+      input.value = input.value.replace(/[^a-zA-Z]/g,'');
+    });
+  }
+});
+
+// Toggle password visibility
+document.querySelectorAll('.toggle-password').forEach((eye) => {
+  eye.addEventListener('click', () => {
+    const pwdInput = eye.previousElementSibling;
+    pwdInput.type = pwdInput.type === 'password' ? 'text' : 'password';
+  });
+});
+
+// Signup button click
+signupBtn.addEventListener('click', () => {
+  const inputsText = document.querySelectorAll('input[type="text"]');
+  const firstName = inputsText[0].value.trim();
+  const lastName = inputsText[1].value.trim();
+  const mi = inputsText[2].value.trim();
+
+  const email = document.querySelector('input[type="email"]').value.trim();
+  const password = document.getElementById('password').value.trim();
+  const confirmPassword = document.getElementById('confirmPassword').value.trim();
+
+  if (!firstName || !lastName || !email || !password || !confirmPassword) {
+    signupMessage.style.color = 'red';
+    signupMessage.textContent = 'Please fill in all fields';
+    return;
+  }
+
+  if (!email.endsWith('@gmail.com')) {
+    signupMessage.style.color = 'red';
+    signupMessage.textContent = 'Please use a valid Gmail account';
+    return;
+  }
+
+  if (password !== confirmPassword) {
+    signupMessage.style.color = 'red';
+    signupMessage.textContent = 'Passwords do not match';
+    return;
+  }
+
+  const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+  if (!passwordRegex.test(password)) {
+    signupMessage.style.color = 'red';
+    signupMessage.textContent = 'Password must be at least 8 characters long and include uppercase, lowercase, number, and special character';
+    return;
+  }
+
+  const newUser = new User(firstName, lastName, mi, email, password);
+  newUser.saveToStorage();
+
+  signupMessage.style.color = 'green';
+  signupMessage.textContent = 'Sign up successful! Redirecting to login...';
+
+  setTimeout(() => {
+    window.location.href = 'index.html';
+  }, 2000);
+});
+
+
+
+</script>
+
+</body>
+</html>
