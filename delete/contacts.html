@@ -5,307 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact - SafeRouteManolo</title>
 
-    <style>
- * { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  font-family: Arial, sans-serif;
-  background-color: #fff;
-  color: #000;
-}
-
-/* Header */
-header {
-  background-color: #ffffff;
-  border-bottom: 1px solid #b5b5b5;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-/* Container */
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 16px 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-/* Logo */
-.logo {
-  font-family: "Gadugi", "Segoe UI", Arial, sans-serif;
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: #000;
-  text-decoration: none;
-  display: flex;
-  gap: 0px;
-}
-.logo-icon { width: 40px; height: 40px; border-radius: 8px; }
-
-/* Nav */
-nav { display: flex; gap: 18px; }
-.nav-links { display: flex; gap: 18px; }
-.nav-links a {
-  text-decoration: none;
-  color: #000;
-  padding: 12px 17px;
-  font-weight: 500;
-  font-size: 16px;
-  transition: color 0.2s ease;
-}
-.nav-links a:hover { color: rgb(223, 65, 223); }
-
-/* Profile */
-.profile { display: flex; align-items: center; gap: 6px; }
-.profile img { width: 30px; height: 30px; border-radius: 50%; }
-
-/* Dropdown */
-.dropdown { position: relative; display: flex; align-items: center; gap: 6px; cursor: pointer; }
-.dropdown-arrow { font-size: 14px; color: #000; }
-.dropdown-menu {
-  position: absolute;
-  top: 60px;
-  right: 0;
-  width: 200px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  display: none;
-  flex-direction: column;
-  z-index: 20;
-}
-.dropdown-menu.show { display: flex; }
-.dropdown-item { padding: 12px; font-size: 14px; border-bottom: 1px solid #eee; color: #333; }
-.dropdown-item.logout { color: red; font-weight: bold; }
-
-.mobile-menu-button {
-  display: none; /* desktop hidden */
-}
-
-/* Mobile Responsive */
-@media (max-width: 768px) {
-
-  /* Container padding */
-  .container {
-    padding: 30px 12px;
-    position: relative;
-  }
-
-  /* Hamburger smaller and lower */
- /* Mobile hamburger color */
-.mobile-menu-button {
-    display: block;
-    font-size: 20px;
-    position: absolute;
-    left: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 1200; /* higher than nav and map controls */ /* higher than logo */
-    color: rgb(223, 65, 223);
-    background: none;
-    border: none;
-    cursor: pointer;
-}
-
-.logo {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 1rem;
-    z-index: 100; /* lower than hamburger */
-}
-
-
-  .logo-icon {
-    width: 30px;
-    height: 30px;
-  }
-
-  /* Profile smaller */
-  .profile {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    gap: 4px;
-    z-index: 1002;
-  }
-
-  .profile img {
-    width: 24px;
-    height: 24px;
-  }
-
-  /* Dropdown move slightly up */
-  .dropdown-menu {
-    top: 50px; /* reduce from 60px to move it up */
-    right: 0;
-    width: 300px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    display: none;
-    flex-direction: column;
-    z-index: 1200; /* above other elements */
-  }
-
-  .dropdown-menu.show { display: flex; }
-
-  /* Nav slides from left */
-  .nav-links {
-    position: fixed;
-    top: 0;
-    left: -100%;
-    width: 220px;
-    height: 100vh;
-    background-color: #1e1e2f;
-    flex-direction: column;
-    padding-top: 60px;
-    gap: 10px;
-    transition: left 0.3s ease;
-    z-index: 2000;
-  }
-
-  .nav-links a {
-    color: #fff;
-    font-size: 14px;
-    padding: 10px 16px;
-  }
-
-.nav-links.open {
-    left: 0;
-    z-index: 1100; /* higher than Leaflet controls */
-}
-
-}
-
-
-  #mobileNav a {
-    padding: 12px 20px;
-    border-bottom: 1px solid #eee;
-    color: #000;
-    font-weight: 500;
-    text-decoration: none;
-  }
-
-  #mobileNav a:last-child {
-    border-bottom: none;
-  }
-
-  /* Main content below sidebar */
-  .main {
-    flex: 1;
-    width: 100%;
-    padding: 10px;
-    margin-top: -41px;
-  }
-
-/* Contact Page Styles */
-.contact-hero {
-  background: url('https://images.unsplash.com/photo-1557804506-669a67965ba0?auto=format&fit=crop&w=1950&q=80') no-repeat center center;
-  background-size: cover;
-  height: 300px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.contact-hero-overlay {
-  background-color: rgba(0,0,0,0.5);
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.contact-hero h1 {
-  color: #ff68c4;
-  font-size: 2.5rem;
-  text-align: center;
-}
-
-.contact-section {
-  padding: 60px 20px;
-  text-align: center;
-}
-
-.contact-section h2 {
-  font-size: 2rem;
-  color: #ff68c4;
-  margin-bottom: 40px;
-}
-
-.contact-cards {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap;
-}
-
-.contact-card {
-  background: #fff;
-  border-radius: 12px;
-  padding: 30px;
-  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-  width: 300px;
-  text-align: center;
-  transition: transform 0.3s ease;
-}
-
-.contact-card:hover {
-  transform: translateY(-10px);
-}
-
-.contact-card img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  object-fit: cover;
-  margin-bottom: 20px;
-}
-
-.contact-card h3 {
-  font-size: 1.5rem;
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.contact-card p {
-  font-size: 1rem;
-  color: #666;
-  margin-bottom: 20px;
-}
-
-.social-icons {
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-}
-
-.social-icons a {
-  color: #ff68c4;
-  font-size: 1.5rem;
-  transition: color 0.3s ease;
-}
-
-.social-icons a:hover {
-  color: #e055b3;
-}
-
-/* Responsive */
-@media (max-width: 768px) {
-  .contact-hero h1 { font-size: 2rem; }
-  .contact-cards { flex-direction: column; align-items: center; }
-  .contact-card { width: 100%; max-width: 300px; }
-}
-
-    </style>
+    <!-- Link External CSS -->
+    <link rel="stylesheet" href="contacts.css">
 </head>
 <body>  
+
 <header>
   <div class="container">
     <!-- Logo -->
@@ -324,6 +28,7 @@ nav { display: flex; gap: 18px; }
         <a href="about.html">About</a>
         <a href="contacts.html">Contact</a>
       </div>
+
       <!-- Hamburger for mobile -->
       <button class="mobile-menu-button" id="mobileBtn">☰</button>
     </nav>
@@ -333,11 +38,10 @@ nav { display: flex; gap: 18px; }
       <img src="https://i.pinimg.com/736x/36/9a/2d/369a2d86c511f24fe51ced8f29d6ae6e.jpg">
       <span class="dropdown-arrow">▼</span>
 
-    <div class="dropdown-menu">
-    <div class="dropdown-item" id="displayUsername">Full Name</div>
-    <div class="dropdown-item logout">Logout</div>
-</div>
-
+      <div class="dropdown-menu">
+        <div class="dropdown-item" id="displayUsername">Full Name</div>
+        <div class="dropdown-item logout">Logout</div>
+      </div>
     </div>
   </div>
 </header>
@@ -351,107 +55,47 @@ nav { display: flex; gap: 18px; }
 
 <section class="contact-section">
   <h2>Get In Touch</h2>
+
   <div class="contact-cards">
+
     <div class="contact-card">
       <img src="https://i.pravatar.cc/150?img=1" alt="Nicole Dela Cruz">
       <h3>Nicole Dela Cruz</h3>
       <p>Project Manager<br>Email: nicole.delacruz@example.com<br>Phone: +63 912 345 6789</p>
       <div class="social-icons">
-        <a href="mailto:nicole.delacruz@example.com" title="Email">📧</a>
-        <a href="https://facebook.com/nicole.delacruz" title="Facebook" target="_blank">📘</a>
-        <a href="tel:+639123456789" title="Phone">📞</a>
+        <a href="mailto:nicole.delacruz@example.com">📧</a>
+        <a href="https://facebook.com/nicole.delacruz" target="_blank">📘</a>
+        <a href="tel:+639123456789">📞</a>
       </div>
     </div>
+
     <div class="contact-card">
       <img src="https://i.pravatar.cc/150?img=2" alt="Juan Dela Cruz">
       <h3>Juan Dela Cruz</h3>
       <p>Developer<br>Email: juan.delacruz@example.com<br>Phone: +63 987 654 3210</p>
       <div class="social-icons">
-        <a href="mailto:juan.delacruz@example.com" title="Email">📧</a>
-        <a href="https://facebook.com/juan.delacruz" title="Facebook" target="_blank">📘</a>
-        <a href="tel:+639876543210" title="Phone">📞</a>
+        <a href="racasa.grace1@gmail.com">📧</a>
+        <a href="https://www.facebook.com/grasya.gkvs" target="_blank">📘</a>
+        <a href="09944543739">📞</a>
       </div>
     </div>
+
     <div class="contact-card">
       <img src="https://i.pravatar.cc/150?img=3" alt="Maria Santos">
       <h3>Maria Santos</h3>
       <p>Designer<br>Email: maria.santos@example.com<br>Phone: +63 955 123 4567</p>
       <div class="social-icons">
-        <a href="mailto:maria.santos@example.com" title="Email">📧</a>
-        <a href="https://facebook.com/maria.santos" title="Facebook" target="_blank">📘</a>
-        <a href="tel:+639551234567" title="Phone">📞</a>
+        <a href="mailto:maria.santos@example.com">📧</a>
+        <a href="https://facebook.com/maria.santos" target="_blank">📘</a>
+        <a href="tel:+639551234567">📞</a>
       </div>
     </div>
+
   </div>
 </section>
 
-    <script>
-const mobileBtn = document.getElementById('mobileBtn');
-const navLinks = document.getElementById('navLinks');
+<!-- Link External JS -->
+<script src="contacts.js"></script>
 
-mobileBtn.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
-  mobileBtn.textContent = navLinks.classList.contains('open') ? '✖' : '☰';
-});
-
-const dropdown = document.querySelector(".dropdown");
-const dropdownMenu = document.querySelector(".dropdown-menu");
-
-dropdown.addEventListener("click", () => {
-  dropdownMenu.classList.toggle("show");
-});
-
-document.addEventListener("click", (e) => {
-  if (!dropdown.contains(e.target)) {
-    dropdownMenu.classList.remove("show");
-  }
-});
-
-
-
-// Select the logout button
-const logoutBtn = document.querySelector('.dropdown-item.logout');
-
-// Add click event
-logoutBtn.addEventListener('click', () => {
-  // Optional: Clear saved user from localStorage if you want to "log out" completely
-  localStorage.removeItem('user');
-
-  // Redirect to login page (or any page you want)
-  window.location.href = 'index.html';
-});
-
-
-// Wait until DOM is fully loaded
-document.addEventListener("DOMContentLoaded", () => {
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    if (!user) {
-        console.log("No user found in localStorage");
-        return;
-    }
-
-    // Uppercase first name
-    const firstName = user.firstName ? user.firstName.toUpperCase() : "";
-    // Middle initial with dot
-    const middleInitial = user.mi ? user.mi.charAt(0).toUpperCase() + "." : "";
-    // Uppercase last name
-    const lastName = user.lastName ? user.lastName.toUpperCase() : "";
-
-    // Combine
-    const fullName = `${firstName} ${middleInitial} ${lastName}`.trim();
-
-    // Update dropdown
-    const display = document.getElementById("displayUsername");
-    if (display) {
-        display.textContent = fullName;
-    } else {
-        console.log("displayUsername div NOT found");
-    }
-});
-
-
-    </script>
-   
 </body>
 </html>
