@@ -1,393 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<title>Your Travel Blog</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
-
-<style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-body {
-  font-family: Arial, sans-serif;
-  background-color: #ffffff;
-  color: #000;
-  overflow: hidden;
-}
-
-/* Header */
-header {
-  background-color: #ffffff;
-  border-bottom: 1px solid #b5b5b5;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-}
-
-.container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 16px 10px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.logo {
-  font-family: "Gadugi", "Segoe UI", Arial, sans-serif;
-  font-size: 1.8rem;
-  font-weight: 600;
-  color: #000;
-  text-decoration: none;
-  display: flex;
-  gap: 0px;
-}
-.logo-icon { width: 40px; height: 40px; border-radius: 8px; }
-
-nav { display: flex; gap: 18px; }
-.nav-links { display: flex; gap: 18px; }
-.nav-links a {
-  text-decoration: none;
-  color: #000;
-  padding: 12px 17px;
-  font-weight: 500;
-  font-size: 16px;
-  transition: color 0.2s ease;
-}
-.nav-links a:hover { color: rgb(223, 65, 223); }
-
-.profile { display: flex; align-items: center; gap: 6px; }
-.profile img { width: 30px; height: 30px; border-radius: 50%; }
-
-.dropdown { position: relative; display: flex; align-items: center; gap: 6px; cursor: pointer; }
-.dropdown-arrow { font-size: 14px; color: #000; }
-.dropdown-menu {
-  position: absolute;
-  top: 60px;
-  right: 0;
-  width: 200px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  display: none;
-  flex-direction: column;
-  z-index: 20;
-}
-.dropdown-menu.show { display: flex; }
-.dropdown-item { padding: 12px; font-size: 14px; border-bottom: 1px solid #eee; color: #333; }
-.dropdown-item.logout { color: red; font-weight: bold; }
-
-/* Mobile menu */
-.mobile-menu-button { display: none; }
-
-/* ===================== NEW LAYOUT ===================== */
-.main-layout {
-  display: flex;
-  height: calc(100vh - 80px); /* Adjusted to account for header height approx. */
-  gap: 20px;
-  padding: 20px;
-}
-
-/* LEFT SIDE */
-.left-side {
-  margin-top: 5px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-
-.scroll-wrapper {
-  height: 100%; /* Full height of left-side to prevent cutting */
-  overflow-y: auto;
-  padding: 10px;
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  background: #f0f2f5; /* light FB-style background */
-}
-
-/* Each post card */
-.data-card {
-  color: #000000;
-  display: flex;
-  flex-direction: column; /* 👈 Stack text and images */
-  background: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 2px 5px rgb(251, 251, 251);
-  padding: 12px;
-  gap: 15px;
-  transition: transform 0.1s;
-}
-
-
-.data-card:hover {
-  transform: scale(1.01);
-}
-
-/* Left side: texts */
-.data-card .text-content {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-}
-
-/* Right side: images */
-/* FB-style image layout – NEW VERSION */
-.data-card .images {
-  width: 100%;
-  display: grid;
-  gap: 0;              /* ❗ NO SPACES between images */
-  overflow: hidden;    /* prevents weird overflow */
-  border-radius: 10px;
-}
-
-/* 1 image full width */
-.data-card .images.one {
-  grid-template-columns: 1fr;
-}
-
-.data-card .images.one img {
-  width: 100%;
-  height: 300px;       /* fixed height for FB-style crop */
-  object-fit: cover;
-}
-
-/* 2 images side-by-side */
-.data-card .images.two {
-  grid-template-columns: 1fr 1fr;
-}
-
-.data-card .images.two img {
-  width: 100%;
-  height: 300px;       /* same height, perfect crop */
-  object-fit: cover;
-}
-
-/* 3+ images, FB style: grid of 2 columns */
-.data-card .images.more {
-  grid-template-columns: 1fr 1fr;
-}
-
-.data-card .images.more img {
-  width: 100%;
-  height: 200px;      /* slightly shorter so grid looks neat */
-  object-fit: cover;
-}
-
-
-/* Full image popup */
-#imagePopup {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0,0,0,0.85);
-  display: flex;
-  justify-content: center; /* Center horizontally */
-  align-items: center;     /* Center vertically */
-  visibility: hidden;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-  z-index: 9999;           /* Make sure it’s above everything */
-}
-
-#imagePopup.show {
-  visibility: visible;
-  opacity: 1;
-}
-
-#imagePopup img {
-  max-width: 90%;
-  max-height: 90%;
-  object-fit: contain;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(255,255,255,0.3);
-}
-
-
-/* Make post text bigger */
-.text-content {
-  font-size: 1.1rem;   /* bigger overall */
-  line-height: 1.45;
-}
-
-.text-content .field-title {
-  font-size: 1.20rem;  /* post title bigger */
-  font-weight: 700;
-}
-
-.text-content .field-value {
-  font-size: 1.1rem;   /* description + severity bigger */
-}
-
-
-
-/* RIGHT SIDE */
-/* RIGHT SIDE */
-.right-side {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.weather-box{
-  color: #fff;
-  background-color: rgb(107, 75, 115);
-}
-
-/* Weather + Chart same height */
-.weather-box,
-.chart-box {
-  margin-top: 10px;
-  height: 300px;  /* same height for both, smaller but readable */
-  border-radius: 16px;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Scale chart inside */
-.chart-box canvas {
-  margin-top: -px;
-  width: 100% !important;   /* bigger than before */
-  height: 100% !important;
-  object-fit: contain;
-}
-
-.chart-box {
-  margin-top: 10px;
-  height: 300px;  
-  border-radius: 16px;
-  box-shadow: 0 4px 14px rgba(0,0,0,0.1);
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;  /* align everything to the top */
-  align-items: center;
-}
-
-.overview-header {
-  font-size: 1.6rem;
-  font-weight: 600;
-  margin-bottom: 5px;  /* smaller gap below title */
-}
-
-.chart-description {
-  font-size: 0.9rem;
-  color: #555;
-  margin-bottom: 5px;  /* smaller gap below description */
-  text-align: center;
-}
-
-/* Weather box content adjustments */
-.weather-box img {
-  width: 60px;
-  height: 60px;
-}
-
-.weather-box div {
-  gap: 4px;
-}
-
-.weather-horizontal {
-  display: flex;
-  justify-content: space-between; /* spread left and right */
-  align-items: center;
-  width: 100%;
-  gap: 40px; /* more space between left and right */
-}
-
-.weather-left {
-  display: flex;
-  flex-direction: column;
-  align-items: center; /* center icon and temp */
-  justify-content: center;
-  min-width: 150px;
-  margin-left: 100px;
-}
-
-.weather-left img {
-  width: 80px;
-  height: 80px;
-  margin-bottom: 5px;
-}
-
-.weather-left .temp {
-  font-size: 2.5rem;
-  font-weight: bold;
-  text-align: center; /* center temperature */
-}
-
-.weather-right {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  gap: 6px;
-  padding-left: 100px; /* push it more to the right */
-  flex: 1;
-}
-
-.weather-right h2 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin: 0;
-}
-
-.weather-right h4 {
-  font-size: 1rem;
-  opacity: 0.8;
-  margin: 0;
-}
-
-.weather-right .weather-details {
-  font-size: 0.9rem;
-  opacity: 0.9;
-}
-
-
-
-
-
-/* Overview header */
-.overview-header {
-  font-size: 1.6rem;
-  font-weight: 600;
-  margin-bottom: 10px;
-}
-
-/* RESPONSIVE */
-@media (max-width: 1024px) {
-  .main-layout {
-    flex-direction: column;
-    height: auto;
-  }
-  .left-side, .right-side { width: 100%; flex: none; }
-  .scroll-wrapper { max-height: 300px; }
-  .weather-box, .chart-box { height: 300px; }
-}
-
-/* Responsive adjustments */
-@media (max-width: 1024px) {
-  .main-layout {
-    flex-direction: column;
-    padding: 10px 20px;
-    height: auto;
-  }
-
-  .left-side, .right-side { flex: none; width: 100%; }
-  .scroll-wrapper { max-height: 300px; }
-  .weather-box, .chart-box { height: 300px; }
-}
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <title>SafeRouteManolo Dashboard</title>
+  <link rel="stylesheet" href="dashboard.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -397,7 +16,6 @@ nav { display: flex; gap: 18px; }
       <img src="/ICONS/purp.png" class="logo-icon">
       <span style="color: rgb(223, 65, 223); font-weight: 900;">Safe</span>RouteManolo
     </a>
-
     <nav>
       <div class="nav-links" id="navLinks">
         <a href="index.html">Home</a>
@@ -409,11 +27,9 @@ nav { display: flex; gap: 18px; }
       </div>
       <button class="mobile-menu-button" id="mobileBtn">☰</button>
     </nav>
-
     <div class="profile dropdown">
       <img src="https://i.pinimg.com/736x/36/9a/2d/369a2d86c511f24fe51ced8f29d6ae6e.jpg">
       <span class="dropdown-arrow">▼</span>
-
       <div class="dropdown-menu">
         <div class="dropdown-item" id="displayUsername">Full Name</div>
         <div class="dropdown-item logout">Logout</div>
@@ -422,233 +38,48 @@ nav { display: flex; gap: 18px; }
   </div>
 </header>
 
-<!-- MAIN LAYOUT -->
 <div class="main-layout">
-  <!-- LEFT SIDE: OVERVIEW -->
+  <!-- LEFT SIDE -->
   <div class="left-side">
     <div class="overview-header">Overview</div>
+
+    <!-- CRUD: Add Hazard Form -->
+    <form id="addHazardForm" style="margin-bottom:10px;">
+      <input type="text" id="hazardTitle" placeholder="Title" required>
+      <input type="text" id="hazardDesc" placeholder="Description" required>
+      <select id="hazardSeverity" required>
+        <option value="">Severity</option>
+        <option value="High">High</option>
+        <option value="Medium">Medium</option>
+        <option value="Low">Low</option>
+      </select>
+      <button type="submit">Add Hazard</button>
+    </form>
+
     <div class="scroll-wrapper" id="cardContainer"></div>
   </div>
-   <!-- Full image popup -->
-<div id="imagePopup">
-  <img src="" alt="Full Image" id="popupImg">
-</div>
 
-  <!-- RIGHT SIDE: WEATHER + CHART -->
-<!-- RIGHT SIDE: WEATHER + CHART -->
-<div class="right-side">
-  <div class="weather-box" id="weatherBox">
-    <div class="overview-header">Weather</div>
-    <div class="weather-content">
-      <p class="placeholder-text">Loading Weather...</p>
-    </div>
-   
+  <!-- Image Popup -->
+  <div id="imagePopup">
+    <img src="" id="popupImg" alt="Full Image">
   </div>
 
-<div class="chart-box">
-  <div class="chart-description">Hazard severity distribution</div>
-  <canvas id="severityChart"></canvas>
-</div>
-
-
-
-<script>
-// ---------------- Mobile Menu ----------------
-const mobileBtn = document.getElementById('mobileBtn');
-const navLinks = document.getElementById('navLinks');
-mobileBtn.addEventListener('click', () => {
-  navLinks.classList.toggle('open');
-  mobileBtn.textContent = navLinks.classList.contains('open') ? '✖' : '☰';
-});
-
-// ---------------- Dropdown ----------------
-const dropdown = document.querySelector(".dropdown");
-const dropdownMenu = document.querySelector(".dropdown-menu");
-dropdown.addEventListener("click", () => dropdownMenu.classList.toggle("show"));
-document.addEventListener("click", (e) => {
-  if (!dropdown.contains(e.target)) dropdownMenu.classList.remove("show");
-});
-
-// ---------------- Logout ----------------
-document.querySelector('.dropdown-item.logout').addEventListener('click', () => {
-  localStorage.removeItem('user');
-  window.location.href = 'index.html';
-});
-
-// ---------------- Display Username ----------------
-document.addEventListener("DOMContentLoaded", () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  if (!user) return;
-  const fullName = `${user.firstName?.toUpperCase() || ""} ${user.mi ? user.mi[0].toUpperCase()+'.' : ""} ${user.lastName?.toUpperCase() || ""}`.trim();
-  const display = document.getElementById("displayUsername");
-  if (display) display.textContent = fullName;
-});
-
-// ---------------- Load Dashboard Posts ----------------
-function loadDashboardPosts() {
-  const cardContainer = document.getElementById("cardContainer");
-  cardContainer.innerHTML = '';
-
-  const posts = JSON.parse(localStorage.getItem('markers')) || [];
-
-  posts.forEach(post => {
-    const card = document.createElement('div');
-    card.className = 'data-card';
-
-    // Text content
-    const textDiv = document.createElement('div');
-    textDiv.className = 'text-content';
-    textDiv.innerHTML = `
-      <div class="field-title"><strong>${escapeHtml(post.title)}</strong></div>
-      <div class="field-value">${escapeHtml(post.desc)}</div>
-      <div class="field-value"><strong>Severity:</strong> ${post.severity ? post.severity.charAt(0).toUpperCase() + post.severity.slice(1) : 'N/A'}</div>
-    `;
-
-    // Images
-    const imagesDiv = document.createElement('div');
-    if (post.images?.length === 1) imagesDiv.className = 'images one';
-    else if (post.images?.length === 2) imagesDiv.className = 'images two';
-    else if (post.images?.length >= 3) imagesDiv.className = 'images more';
-
-    post.images?.forEach(src => {
-      const img = document.createElement('img');
-      img.src = src;
-      img.style.cursor = 'zoom-in';
-      img.addEventListener('click', () => showFullImage(src));
-      imagesDiv.appendChild(img);
-    });
-
-    card.appendChild(textDiv);
-    card.appendChild(imagesDiv);
-    cardContainer.appendChild(card);
-  });
-}
-
-// Escape HTML
-function escapeHtml(s) {
-  return s ? s.replace(/[&<>"']/g, m => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[m])) : '';
-}
-
-// ---------------- Image Popup ----------------
-function showFullImage(src) {
-  const popup = document.getElementById('imagePopup');
-  const img = document.getElementById('popupImg');
-  img.src = src;
-  popup.classList.add('show');
-}
-
-document.getElementById('imagePopup').addEventListener('click', () => {
-  const popup = document.getElementById('imagePopup');
-  popup.classList.remove('show');
-  setTimeout(() => document.getElementById('popupImg').src = '', 200);
-});
-
-// ---------------- Severity Chart ----------------
-function renderSeverityChart() {
-  const posts = JSON.parse(localStorage.getItem('markers')) || [];
-  const severityCount = { High: 0, Medium: 0, Low: 0 };
-
-  posts.forEach(p => {
-    const sev = p.severity?.toLowerCase();
-    if (sev === 'high') severityCount.High++;
-    else if (sev === 'medium') severityCount.Medium++;
-    else if (sev === 'low') severityCount.Low++;
-  });
-
-  const ctx = document.getElementById('severityChart').getContext('2d');
-  new Chart(ctx, {
-    type: 'bar',
-    data: {
-      labels: ['High', 'Medium', 'Low'],
-      datasets: [{
-        label: 'Hazard Severity',
-        data: [severityCount.High, severityCount.Medium, severityCount.Low],
-        backgroundColor: ['#ff0000', '#ffa500', '#00cc00'],
-        borderColor: ['#ff0000', '#ffa500', '#00cc00'],
-        borderWidth: 1
-      }]
-    },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,
-      plugins: { legend: { display: false } },
-      scales: {
-        y: { beginAtZero: true, title: { display: true, text: 'Number of Hazards' } },
-        x: { title: { display: true, text: 'Severity' } }
-      }
-    }
-  });
-}
-
-
-// Weather API
-async function loadWeather() {
-  const apiKey = "a086e741534d42a385c31855251511";
-  const location = "Manolo Fortich";
-  const weatherBox = document.getElementById("weatherBox");
-  if (!weatherBox) return;
-
-  weatherBox.innerHTML = "<p class='placeholder-text'>Loading Weather...</p>";
-  try {
-    const res = await fetch(`https://api.weatherapi.com/v1/current.json?key=${apiKey}&q=${location}`);
-    const data = await res.json();
-    if (data.error) throw new Error(data.error.message);
-
-weatherBox.innerHTML = `
-  <div class="weather-horizontal">
-    <div class="weather-left">
-      <img src="https:${data.current.condition.icon}" alt="${data.current.condition.text}">
-      <div class="temp">${data.current.temp_c}°C</div>
+  <!-- RIGHT SIDE -->
+  <div class="right-side">
+    <div class="weather-box" id="weatherBox">
+      <div class="overview-header">Weather</div>
+      <div class="weather-content">
+        <p class="placeholder-text">Loading Weather...</p>
+      </div>
     </div>
-    <div class="weather-right">
-      <h2>${data.location.name}</h2>
-      <h4>${data.location.region}</h4>
-      <div>${data.current.condition.text}</div>
-      <div class="weather-details">Wind: ${data.current.wind_kph} kph | Humidity: ${data.current.humidity}%</div>
+
+    <div class="chart-box">
+      <div class="chart-description">Hazard severity distribution</div>
+      <canvas id="severityChart"></canvas>
     </div>
   </div>
-`;
+</div>
 
-
-  } catch (err) {
-    console.error(err);
-    weatherBox.innerHTML = "<p class='placeholder-text'>Unable to load weather data.</p>";
-  }
-}
-
-loadWeather();
-setInterval(loadWeather, 600000);
-
-// ---------------- Load Dashboard ----------------
-document.addEventListener("DOMContentLoaded", () => {
-  loadDashboardPosts();
-  renderSeverityChart();
-});
-
-// Auto-update dashboard when localStorage changes (another tab/page adds markers)
-window.addEventListener('storage', (event) => {
-  if(event.key === 'markers') {
-    loadDashboardPosts(); // refresh dashboard posts
-    renderSeverityChart(); // refresh chart
-  }
-});
-
-// Display user name
-document.addEventListener("DOMContentLoaded", () => {
-  const user = JSON.parse(localStorage.getItem("user"));
-  if (!user) return;
-  const fullName = `${user.firstName?.toUpperCase() || ""} ${user.mi ? user.mi.charAt(0).toUpperCase() + "." : ""} ${user.lastName?.toUpperCase() || ""}`.trim();
-  const display = document.getElementById("displayUsername");
-  if (display) display.textContent = fullName;
-});
-
-// Logout
-document.querySelector('.dropdown-item.logout').addEventListener('click', () => {
-  localStorage.removeItem('user');
-  window.location.href = 'index.html';
-});
-</script>
-
-
+<script src="dashboard.js"></script>
 </body>
 </html>
