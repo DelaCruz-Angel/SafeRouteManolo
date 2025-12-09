@@ -27,40 +27,31 @@
 
 .left {
   flex: 1;
-  position: relative;
-  overflow: hidden;
+  background: url("https://i.pinimg.com/1200x/47/e5/c7/47e5c7edb718f42d3b8240b3d12725dc.jpg"); /* white background */
+  display: flex;
+  justify-content: center; /* center horizontally */
+  align-items: center;     /* center vertically */
 }
 
-/* Fixed logo on top-left */
-.left .logo {
-  position: absolute;
-  top: 20px;
-  left: 20px;
-  width: 150px;
-  z-index: 10; /* makes sure it stays above the slider */
+.logo-wrapper {
+  display: flex;
+  flex-direction: column;  /* stack icon and text */
+  align-items: center;
+  gap: 15px;
 }
 
-/* Slider Styles */
-.slider {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
+.logo-icon {
+  width: 130px;   /* bigger logo */
+  height: 130px;
 }
 
-.slide {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transition: opacity 1s ease-in-out;
+.logo-text {
+  font-size: 2.8rem;  /* bigger text */
+  font-weight: 700;
 }
 
-.slide.active {
-  opacity: 1;
-}
+
+
 
 
 
@@ -102,7 +93,7 @@
 
     .forgot-password {
       font-size: 0.9rem;
-      color: #167740;
+      color: #734f96;
       text-align: right;
       margin-bottom: 20px;
       cursor: pointer;
@@ -111,7 +102,7 @@
    .login-btn {
       width: 100%;
       padding: 12px;
-      background: #167740;
+      background: #734f96;
       color: white;
       border: none;
       border-radius: 5px;
@@ -140,11 +131,15 @@
     }
 
     .signup-text a {
-      color: #167740;
+      color: #734f96;
       text-decoration: none;
       font-weight: 600;
       margin-left: 5px;
     }
+
+        .mobile-logo {
+  display: none; /* hidden on desktop */
+}
 
       @media (max-width: 900px) {
   /* Shrink texts for mobile screens */
@@ -186,23 +181,51 @@
   }
 
   /* Right side takes full width and height */
+@media (max-width: 900px) {
+
+  .container {
+    flex-direction: column;
+  }
+
+  .left {
+    display: none; /* hides the left side */
+  }
+
   .right {
     width: 100%;
-    height: auto; /* let it grow with content */
-    padding: 5px 20px;
+    height: auto;
+    padding: 20px;
     justify-content: flex-start;
   }
 
-  /* Place the logo inside the right side on mobile */
-  .right::before {
-    content: "";
-    display: block;
-    background: url('/ICONS/newlog.png') no-repeat center;
-    background-size: contain;
-    width: 250px;   /* increase from 120px */
-    height: 200px;  /* increase from 120px */
-    margin: 0 auto 30px auto; /* keep centered and spacing below */
+  /* ⭐ MOBILE LOGO FIX — side-by-side */
+  .mobile-logo {
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 30px;
   }
+
+ .mobile-logo img {
+    width: 40px;   /* smaller logo icon */
+    height: 40px;
+}
+
+.mobile-logo span {
+    font-size: 1.4rem;  /* smaller logo text */
+    font-weight: 500;
+}
+
+
+  /* Remove the old background logo */
+  .right::before {
+    display: none !important;
+    content: none;
+  }
+}
+
 }
 
 
@@ -211,17 +234,18 @@
 <body>
 
   <div class="container">
-    <!-- Left Side -->
-    <!-- Left Side -->
 <div class="left">
-  <img src="/ICONS/newlog.png" alt="Logo" class="logo">
-
-  <div class="slider">
-    <img src="https://i.pinimg.com/736x/31/31/6a/31316af172d5c1078ed778a00c51a29c.jpg" class="slide active">
-    <img src="https://i.pinimg.com/736x/df/77/7c/df777cf2f0efc93c55508345c90e469e.jpg" class="slide">
-    <img src="https://i.pinimg.com/736x/fe/11/a9/fe11a99c932781b5326aaaa8771796e0.jpg" class="slide">
-  </div>
+<div class="logo-wrapper">
+  <img src="/ICONS/pu" class="logo-icon">
+  <span class="logo-text"><span style="color: #734f96; font-weight: 900;">Safe</span>RouteManolo</span>
 </div>
+</div>
+   <div class="mobile-logo">
+      <img src="/ICONS/purp.png">
+      <span><span style="color:#734f96; font-weight:900;">Safe</span>RouteManolo</span>
+    </div>
+
+
 
 
     <!-- Right Side -->
@@ -234,22 +258,31 @@
         <input type="text" id="username" placeholder="Enter your username or email">
       </div>
 
-      <div class="input-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" placeholder="Enter your password">
-      </div>
+    <div class="input-group">
+  <label for="password">Password</label>
+  <div style="position: relative;">
+    <input type="password" id="password" placeholder="Enter your password">
+    <span class="toggle-password" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); cursor:pointer;">👁️</span>
+  </div>
+</div>
+
 
       <div class="forgot-password">Forgot password?</div>
       
-<button class="login-btn" onclick="location.href='dashboard.html'">Login</button>
+      <!-- Message area -->
+<p id="loginMessage" style="text-align:center; color:red; font-weight:600; margin-bottom:10px;"></p>
+
+<button class="login-btn" id="loginBtn">Login</button>
+
 
 
       <div class="sub-text" style="text-align:center;">Or continue with</div>
-      <div class="social-login">
-        <img src="https://i.pinimg.com/1200x/5b/b0/f7/5bb0f73a7b3e0f976acad614a42e5040.jpg" alt="Facebook">
-        <img src="https://i.pinimg.com/1200x/60/41/99/604199df880fb029291ddd7c382e828b.jpg" alt="Google">
-        <img src="https://i.pinimg.com/736x/19/42/d5/1942d5deb0f788e6228054cd92767ff6.jpg" alt="Instagram">
-      </div>
+     <div class="social-login">
+  <img src="https://i.pinimg.com/1200x/5b/b0/f7/5bb0f73a7b3e0f976acad614a42e5040.jpg" alt="Facebook" id="fbLogin">
+  <img src="https://i.pinimg.com/1200x/60/41/99/604199df880fb029291ddd7c382e828b.jpg" alt="Google" id="gmailLogin">
+  <img src="https://i.pinimg.com/736x/19/42/d5/1942d5deb0f788e6228054cd92767ff6.jpg" alt="Instagram" id="instaLogin">
+</div>
+
 
       <div class="signup-text">
         Don't have an account yet? <a href="/signup.html">Sign Up</a>
@@ -267,8 +300,104 @@
     slides[current].classList.add('active');
   }
 
-  setInterval(nextSlide, 3000); // automatically changes images
+  setInterval(nextSlide, 3000);
+
+  class User {
+    #firstName;
+    #lastName;
+    #mi;
+    #email;
+    #password;
+
+    constructor(firstName, lastName, mi, email, password) {
+      this.#firstName = firstName;
+      this.#lastName = lastName;
+      this.#mi = mi;
+      this.#email = email;
+      this.#password = password;
+    }
+
+    getEmail() { return this.#email; }
+    checkPassword(password) { return this.#password === password; }
+
+    static loadFromStorage() {
+      const savedUser = JSON.parse(localStorage.getItem('user'));
+      if (!savedUser) return null;
+      return new User(
+        savedUser.firstName,
+        savedUser.lastName,
+        savedUser.mi,
+        savedUser.email,
+        savedUser.password
+      );
+    }
+  }
+
+  const loginBtn = document.getElementById('loginBtn');
+  const gmailBtn = document.getElementById('gmailLogin');
+  const fbBtn = document.getElementById('fbLogin');
+  const instaBtn = document.getElementById('instaLogin');
+  const loginMessage = document.getElementById('loginMessage');
+
+  // Login button
+  loginBtn.addEventListener('click', () => {
+    const inputEmail = document.getElementById('username').value.trim();
+    const inputPassword = document.getElementById('password').value.trim();
+
+    const savedUser = User.loadFromStorage();
+    if (!savedUser) {
+      loginMessage.style.color = 'red';
+      loginMessage.textContent = 'No account found. Please sign up first.';
+      return;
+    }
+
+    if (inputEmail === savedUser.getEmail() && savedUser.checkPassword(inputPassword)) {
+      loginMessage.style.color = 'green';
+      loginMessage.textContent = 'Login successful! Redirecting...';
+      setTimeout(() => { window.location.href = 'dashboard.html'; }, 2000);
+    } else {
+      loginMessage.style.color = 'red';
+      loginMessage.textContent = 'Invalid email or password.';
+    }
+  });
+
+  // Social logins
+  function socialLogin(platform) {
+    const input = prompt(`Enter your ${platform} email to continue:`);
+    if (!input) return;
+
+    const savedUser = User.loadFromStorage();
+    if (!savedUser) {
+      loginMessage.style.color = 'red';
+      loginMessage.textContent = 'No account found. Please sign up first.';
+      return;
+    }
+
+    if (input === savedUser.getEmail()) {
+      loginMessage.style.color = 'green';
+      loginMessage.textContent = `${platform} login successful! Redirecting...`;
+      setTimeout(() => { window.location.href = 'dashboard.html'; }, 2000);
+    } else {
+      loginMessage.style.color = 'red';
+      loginMessage.textContent = `${platform} account not registered. Please sign up first.`;
+    }
+  }
+
+  gmailBtn.addEventListener('click', () => socialLogin('Gmail'));
+  fbBtn.addEventListener('click', () => socialLogin('Facebook'));
+  instaBtn.addEventListener('click', () => socialLogin('Instagram'));
+
+
+// Toggle password visibility for login page
+document.querySelectorAll('.toggle-password').forEach((eye) => {
+  eye.addEventListener('click', () => {
+    const pwdInput = eye.previousElementSibling;
+    pwdInput.type = pwdInput.type === 'password' ? 'text' : 'password';
+  });
+});
+
 </script>
+
 
 
 </body>
