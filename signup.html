@@ -3,246 +3,33 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="signup.css">
   <title>Create Account</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-  <style>
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    html, body {
-      height: 100%;
-      margin: 0;
-    }
-
-    .container {
-      display: flex;
-      height: 100vh;
-      width: 100vw;
-    }
-
-    .left {
-      flex: 1;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* Fixed logo on top-left */
-    .left .logo {
-      position: absolute;
-      top: 20px;
-      left: 20px;
-      width: 150px;
-      z-index: 10;
-    }
-
-    /* Slider Styles */
-    .slider {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 0;
-    }
-
-    .slide {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      opacity: 0;
-      transition: opacity 1s ease-in-out;
-    }
-
-    .slide.active {
-      opacity: 1;
-    }
-
-    .right {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 50px 40px;
-      background: #ffffff;
-      overflow: auto;
-      padding-top: 10px;
-    }
-
-    .welcome-text {
-      font-size: 2rem;
-      font-weight: 600;
-      margin-bottom: 10px;
-      margin-top: 50px; /* FIX ADDED */
-    }
-
-    .sub-text {
-      font-size: 1rem;
-      color: #555;
-      margin-bottom: 30px;
-    }
-
-    .input-group {
-      margin-bottom: 20px;
-    }
-
-    input {
-      width: 100%;
-      padding: 12px 15px;
-      margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      font-size: 1rem;
-    }
-
-    .input-row {
-  display: flex;
-  gap: 15px;
-  width: 100%;
-}
-
-.input-group.small {
-  flex: 1;
-}
-
-.input-group.tiny {
-  width: 80px;
-}
-
-button.signup-btn {
-  width: 100%;
-  padding: 12px;
-  background: #167740;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  cursor: pointer;
-}
-
-button.signup-btn:hover {
-  background: #1d701f;
-}
-
-.signin-text {
-  text-align: center;
-  margin-top: 15px;
-  font-size: 0.95rem;
-  color: #555;
-}
-
-.signin-text a {
-  color: #167740;
-  text-decoration: none;
-  font-weight: 600;
-}
-
-.signin-text a:hover {
-  text-decoration: underline;
-}
-
-/* -----------------------------------------
-   MOBILE RESPONSIVE DESIGN – FOR CREATE ACCOUNT PAGE
------------------------------------------- */
-@media (max-width: 900px) {
-
-  /* Stack the full layout */
-  .container {
-    flex-direction: column;
-    height: auto;
-  }
-
-  /* Hide the left slider panel */
-  .left {
-    display: none;
-  }
-
-  /* Right panel becomes full width */
-  .right {
-    width: 100%;
-    height: auto;
-    padding: 20px 25px;
-    justify-content: flex-start;
-    padding-top: 10px;
-  }
-
-  /* Add logo above the form on mobile */
-  .right::before {
-    content: "";
-    display: block;
-    background: url('/ICONS/LOGS.png') no-repeat center;
-    background-size: contain;
-    width: 160px;
-    height: 160px;
-    margin: 0 auto 25px auto;
-  }
-
-  /* Shrink heading text */
-  .welcome-text {
-    font-size: 1.5rem;
-    margin-top: 10px;
-    text-align: center;
-  }
-
-  /* Shrink subtext */
-  .sub-text {
-    font-size: 0.9rem;
-    text-align: center;
-  }
-
-  /* Input labels */
-  .input-group label {
-    font-size: 0.85rem;
-  }
-
-  /* Input text */
-  input {
-    font-size: 0.9rem;
-  }
-
-  /* Adjust 3-column name row (First | Last | MI) */
-  .input-row {
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .input-group.small,
-  .input-group.tiny {
-    width: 100%;
-  }
-
-  /* Sign in text */
-  .signin-text {
-    font-size: 0.85rem;
-    text-align: center;
-  }
-}
-
-  </style>
+ 
 </head>
 <body>
 
 <div class="container">
-<div class="left">
-  <img src="/ICONS/LOGS.png" alt="Logo" class="logo">
-
-  <div class="slider">
-    <img src="https://i.pinimg.com/736x/31/31/6a/31316af172d5c1078ed778a00c51a29c.jpg" class="slide active">
-    <img src="https://i.pinimg.com/736x/df/77/7c/df777cf2f0efc93c55508345c90e469e.jpg" class="slide">
-    <img src="https://i.pinimg.com/736x/fe/11/a9/fe11a99c932781b5326aaaa8771796e0.jpg" class="slide">
-  </div>
+  <div class="left">
+    <div class="logo-wrapper">
+  <img src= /ICONS/newlogg.png class="logo-icon">
+  <span class="logo-text"><span style="color: #267e3e; font-weight: 900;">Safe</span>RouteManolo</span>
 </div>
-
+  </div>
 
 
   <div class="right">
+
+    <div class="mobile-logo">
+  <img src= /ICONS/newlogg.png class="logo-icon">
+  <span class="logo-text"><span style="color: #267e3e; font-weight: 900;">Safe</span>RouteManolo</span>
+</div>
+
     <h1 class="welcome-text">Create Account</h1>
     <p class="sub-text">Fill in the information below</p>
 
-    <!-- FIRST NAME | LAST NAME | MI -->
+
     <div class="input-row">
       <div class="input-group small">
         <label>First Name</label>
@@ -260,53 +47,41 @@ button.signup-btn:hover {
       </div>
     </div>
 
-    <!-- USERNAME -->
-    <div class="input-group">
-      <label>Username</label>
-      <input type="text">
-    </div>
-
-    <!-- EMAIL -->
+  
     <div class="input-group">
       <label>Email</label>
       <input type="email">
     </div>
 
-    <!-- PASSWORD -->
-    <div class="input-group">
+
+    <div class="input-group password-group">
       <label>Password</label>
-      <input type="password">
+      <input type="password" id="password">
+      <span class="toggle-password">👁️</span>
     </div>
 
-    <!-- CONFIRM PASSWORD -->
-    <div class="input-group">
+  
+    <div class="input-group password-group">
       <label>Confirm Password</label>
-      <input type="password">
+      <input type="password" id="confirmPassword">
+      <span class="toggle-password">👁️</span>
     </div>
 
-    <!-- SIGN UP BUTTON -->
+   
+    <p id="signupMessage" style="text-align:center; color:green; font-weight:600; margin-top:10px;"></p>
+
+   
     <button class="signup-btn">Sign Up</button>
 
-    <!-- SIGN IN LINK -->
+  
     <p class="signin-text">
       Already have an account?
       <a href="index.html">Sign in</a>
     </p>
-
   </div>
 </div>
 
-<!-- SLIDER SCRIPT -->
-<script>
-let slides = document.querySelectorAll('.slide');
-let index = 0;
-
-setInterval(() => {
-  slides[index].classList.remove('active');
-  index = (index + 1) % slides.length;
-  slides[index].classList.add('active');
-}, 3000);
-</script>
+<script src="signup.js"></script>
 
 </body>
 </html>

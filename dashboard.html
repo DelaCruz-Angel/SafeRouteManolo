@@ -1,678 +1,88 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
-<style>
-  * { box-sizing: border-box; margin:0; padding:0; font-family:'Poppins',sans-serif; }
-  body, html { 
-    height: 100%; 
-    width: 100%; 
-    background: url("https://i.pinimg.com/736x/18/a8/e1/18a8e19beb25ebbe7bd600911000c4bc.jpg");
-    background-size: cover; /* Makes the image cover the entire screen */
-    background-attachment: fixed; /* Optional: keeps it fixed on scroll */
-}
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="stylesheet" href="dashboard.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<title>Your Travel Blog</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 
-
-.chart-box{
-  background: #8fbc8f ;
-padding: 20px;
-border-radius: 16px;
-box-shadow: 0 4px 14px rgba(0,0,0,0.1);
-margin-top: 20px;
-
-}
-.news-box {
-background: rgb(255, 255, 255);
-padding: 20px;
-border-radius: 16px;
-box-shadow: 0 4px 14px rgba(0,0,0,0.1);
-margin-top: 20px;
-}
-
-  .container { display: flex; height: 100vh; width: 100vw; }
-
-  /* LEFT SIDEBAR */
-  .sidebar {
-    width: 220px; 
-    background-color: #242124 ; 
-    color:rgb(161, 156, 118);
-    display:flex; flex-direction:column; padding-top:20px; position:relative;
-  }
-
-  .sidebar .logo { text-align:center; margin-bottom:20px; }
-  .sidebar .logo img { width:120px; border-radius:10px;  width:180px; 
-    border-radius:10px; }
-
- /* SIDEBAR NAV LINKS */
-.sidebar nav a {
-  display: block;
-  padding: 15px 20px;
-  color: rgb(255, 255, 255);
-  text-decoration: none;
-  margin-bottom: 5px;
-  border-radius: 5px;
-  transition: all 0.3s ease; /* smooth hover */
-}
-
-/* Hover effect only */
-.sidebar nav a:hover {
-  background-color: #838383; /* light highlight */
-  transform: scale(1.03); /* optional: subtle zoom */
-}
-
-.nav-icon {
-    width: 20px;
-    height: 17px;
-    margin-right: 10px;
-    color: #1e4d2b;
-    /* This makes the SVG black — change below to recolor */
-}
-
-
-/* Remove active styling entirely */
-.sidebar nav a.active {
-  background: none;
-  color: rgb(0, 0, 0);
-  font-weight: normal;
-}
-
-.mobile-nav a {
-  padding: 12px 20px;
-  border-bottom: 1px solid #eee;
-  text-decoration: none;
-  color: black;
-  font-weight: 500;
-}
-.mobile-nav a:last-child { border-bottom:none; }
-
-  /* MAIN AREA */
-  .main {
-    flex:1; display:flex; flex-direction:column; padding:20px; position:relative; overflow-y:auto;
-  }
-
-  /* TOP BAR WRAPPER WITH BACKGROUND */
-  .top-bar-wrapper {
-    width: 100%;
-    background-color: #ffffff; /* light blue background */
-    padding: 15px 20px;
-    border-radius: 16px;
-    display: flex;
-    align-items: center;
-    margin-bottom: 20px;
-    position: relative;
-    box-shadow: 0 4px 10px rgba(255, 255, 255, 0.1);
-  }
-
-  .top-bar {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    width: 100%;
-  }
-
-  .welcome-text { font-size: 1rem; color: #000000; }
-
-  .search-container input {
-    width: 300px;
-    padding: 10px 15px;
-    border-radius: 5px;
-    border: 1px solid #167740;
-    font-size: 1rem;
-  }
-
-  .profile { margin-left: auto; cursor:pointer; }
-  .profile img { width:50px; height:50px; border-radius:50%; }
-
-  /* PROFILE DROPDOWN */
-.dropdown {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  cursor: pointer;
-}
-
-.dropdown-arrow {
-  font-size: 14px;
-  color: #000;
-}
-
-.dropdown-menu {
-  position: absolute;
-  top: 60px;
-  right: 0;
-  width: 150px;
-  background: #fff;
-  border-radius: 10px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  display: none;
-  flex-direction: column;
-  overflow: hidden;
-  z-index: 20;
-}
-
-.dropdown-item {
-  padding: 12px;
-  font-size: 14px;
-  border-bottom: 1px solid #eee;
-  color: #333;
-}
-
-.dropdown-item:last-child {
-  border-bottom: none;
-}
-
-.dropdown-item.logout {
-  color: red;
-  font-weight: 600;
-}
-
-/* Visible state */
-.dropdown-menu.show {
-  display: flex;
-}
-
-
-  /* OVERVIEW HEADER */
-  .overview-header { margin-top:20px; font-size:1.5rem; font-weight:600; text-align:left; color: rgb(0, 0, 0); }
-
-  /* HORIZONTAL SCROLL CARDS */
-  .scroll-wrapper {
-    display: flex;
-    gap: 10px;
-    overflow-x: auto;
-    padding: 15px 0;
-    scroll-snap-type: x mandatory;
-    scrollbar-width: none;
-    margin-top: 10px;
-    min-height: 200px;
-    flex-wrap: nowrap;
-  }
-
-  .scroll-wrapper::-webkit-scrollbar { display: none; }
-
-  .data-card {
-    flex: 0 0 auto;
-    width: 280px;
-    background: rgb(255, 255, 255);
-    padding: 20px;
-    border-radius: 18px;
-    scroll-snap-align: start;
-    transition: 0.25s ease;
-    display: flex;
-    gap: 15px;
-    position: relative;
-  }
-
-  .data-card:hover { transform: scale(1.04); }
-
-  .color-line {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 6px;
-    border-radius: 0 0 18px 18px;
-  }
-
-  .icon-box {
-    width: 50px;
-    height: 50px;
-    background: #dfe4ea;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-  }
-  .icon-box img { width: 45px; height: 45px; object-fit: cover; }
-
-  .text-box { flex: 1; }
-  .field-title { font-size: 13px; font-weight: bold; color: #444; margin-top: 3px; }
-  .field-value { font-size: 14px; color: #222; margin-bottom: 3px; }
-
-  /* CHART SECTION */
-  .chart-section { width: 100%; padding: 20px 0 0 0; margin-top: 20px; }
-  .chart-title { margin-bottom: 15px; font-size: 24px; font-weight: 700; color: #333; padding-left: 5px; }
-  .chart-layout { display: flex; gap: 20px; flex-wrap: wrap; }
-
-  .big-chart-box {
-    flex: 1;
-    min-width: 300px;
-    height: 400px;
-    background: white;
-    border-radius: 16px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
-    padding: 20px;
-    position: relative;
-  }
-
-  .weather-box {
-    width: 260px;
-    min-width: 200px;
-    height: 400px;
-    background: #1e4d2b;
-    border-radius: 16px;
-    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
-    padding: 20px;
-  }
-
-  .placeholder-text { font-size: 14px; color: #ffffff; text-align: center; margin-top: 40%; }
-
-  /* Section title */
-  .section-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin: 20px 0 10px 0;
-    color: #000000;
-  }
-
-  /* News feed container */
-  .news-wrapper {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    max-height: 500px;
-    overflow-y: auto;
-    padding-right: 10px;
-  }
-
-  .news-wrapper::-webkit-scrollbar { width: 6px; }
-  .news-wrapper::-webkit-scrollbar-thumb { background-color: rgba(0,0,0,0.2); border-radius: 3px; }
-
-  .news-post {
-    background: #ffffff;
-    border-radius: 12px;
-    padding: 15px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-    display: flex;
-    gap: 15px;
-    align-items: flex-start;
-  }
-
-  .news-post img { width: 100px; height: 100px; object-fit: cover; border-radius: 8px; flex-shrink: 0; }
-  .news-text { flex: 1; }
-  .news-title { font-size: 16px; font-weight: 600; margin-bottom: 5px; color: #000000; }
-  .news-desc { font-size: 14px; color: #595959; line-height: 1.4; }
-
-@media(max-width: 600px){
-
-  /* Container becomes vertical */
-  .container {
-    flex-direction: column;
-    height: auto;
-  }
-
-  /* Sidebar moves on top, full width, no background */
-  .sidebar {
-    width: 100%;
-    background: none;
-    padding: 10px 0;
-    flex-direction: column;
-    position: relative;
-    display: flex;
-  }
-
-  /* Shrink search input on mobile */
-.top-bar-wrapper .search-container input {
-  width: 100px; /* smaller width for mobile */
-  padding: 8px 10px; /* optional: adjust padding */
-  font-size: 0.9rem; /* optional: smaller font */
-}
-
-
-
-  /* Hamburger on top-left */
-  .hamburger {
-    display: block !important;
-    position: absolute;
-    left: 10px;
-    top: 10px;
-    font-size: 28px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    z-index: 200;
-  }
-
-  /* Logo centered */
-  .logo {
-    position: relative;
-    left: 50%;
-    transform: translateX(-50%);
-    margin: 0 0 10px 0;
-  }
-
- .logo img {
-    width: 80px; /* smaller for mobile */
-    height: auto;
-}
-
-
-
-
-  /* Profile on top-right */
-  .profile {
-    position: absolute;
-    right: 10px;
-    top: 18px;
-    margin: 0;
-  }
-
-  .profile img {
-    width: 40px;
-    height: 50px;
-  }
-
-  /* Hide desktop nav links (optional: just show mobile nav when hamburger clicked) */
-  .sidebar nav {
-    display: none;
-  }
-
-  /* Mobile nav menu style */
-#mobileNav {
-    display: none;
-    position: absolute; /* make it float above other elements */
-    top: -300px; /* adjust this to move it above the hamburger */
-    left: 0;
-    width: 50%;
-    flex-direction: column;
-    background: #fff;
-    padding: 10px 0;
-    border-radius: 0;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    z-index: 150;
-}
-
-
-  #mobileNav a {
-    padding: 12px 20px;
-    border-bottom: 1px solid #eee;
-    color: #000;
-    font-weight: 500;
-    text-decoration: none;
-  }
-
-  #mobileNav a:last-child {
-    border-bottom: none;
-  }
-
-  /* Main content below sidebar */
-  .main {
-    flex: 1;
-    width: 100%;
-    padding: 10px;
-    margin-top: -41px;
-  }
-
-  .overview-box {
-    margin-top: 0;   /* or try 10px */
-}
-
-
-  /* Scroll cards & charts full width */
-  .scroll-wrapper, .big-chart-box, .weather-box, .news-wrapper {
-    width: 100%;
-  }
-
-  .data-card {
-    width: 220px; /* scroll horizontally */
-  }
-
-  .big-chart-box, .weather-box {
-    height: 300px;
-  }
-
-  @media(max-width: 600px){
-  /* Container becomes vertical */
-  .container { flex-direction: column; height: auto; }
-
-  /* Sidebar moves on top, full width */
-  .sidebar { width: 100%; background: none; padding: 10px 0; flex-direction: column; position: relative; display: flex; }
-
-  /* Shrink logo */
-  .logo img { width: 60px; height: auto; }
-
-  /* Hamburger position */
-  .hamburger { font-size: 24px; top: 10px; left: 10px; }
-
-  /* Profile image */
-  .profile img { width: 35px; height: 35px; }
-
-  /* Top bar text smaller */
-  .welcome-text { font-size: 0.85rem; }
-  .search-container input { width: 80px; font-size: 0.8rem; padding: 6px 10px; }
-
-  /* Scroll cards smaller */
-  .data-card { width: 180px; padding: 12px; gap: 10px; }
-  .data-card .field-title { font-size: 11px; }
-  .data-card .field-value { font-size: 12px; }
-  .icon-box { width: 40px; height: 40px; }
-  .icon-box img { width: 35px; height: 35px; }
-  .color-line { height: 4px; border-radius: 0 0 12px 12px; }
-
-  /* Charts smaller */
-  .big-chart-box, .weather-box { height: 250px; padding: 15px; }
-  .chart-title { font-size: 18px; }
-
-  /* News posts smaller */
-  .news-wrapper { max-height: 300px; }
-  .news-post img { width: 80px; height: 80px; }
-  .news-title { font-size: 14px; }
-  .news-desc { font-size: 12px; line-height: 1.2; }
-
-  /* Section titles */
-  .overview-header, .section-title { font-size: 1.2rem; }
-}
-
-}
-
-
-
-</style>
 </head>
 <body>
 
-<div class="container">
-<div class="sidebar">
-  <button class="hamburger" id="hamburgerBtn">☰</button>
+<header>
+  <div class="container">
+    <a href="#" class="logo">
+      <img src= /ICONS/newlogg.png class="logo-icon">
+      <span style="color: #3a8944; font-weight: 900;">Safe</span>RouteManolo
+    </a>
 
-  <div class="logo">
-    <img src="/ICONS/newlog.png" alt="Logo">
+
+<nav>
+  <div class="nav-links" id="navLinks">
+    <a href="/index.html">Home</a>
+    <a href="/dashboard.html">Dashboard</a>
+    <a href="/map.html">Checkmap</a>
+    <a href="/about.html">About</a>
+    <a href="/contacts.html">Contact</a>
   </div>
 
-  <div class="mobile-nav" id="mobileNav" style="display:none; flex-direction:column; position:absolute; top:60px; left:10px; background:white; border-radius:10px; box-shadow:0 4px 12px rgba(0,0,0,0.15); z-index:100; overflow:hidden;">
-    <a href="index.html">Home</a>
-    <a href="#">Dashboard</a>
-    <a href="#">About</a>
-    <a href="map.html">Check Map</a>
-    <a href="#">Updates</a>
-    <a href="#">Contacts</a>
-  </div>
-
-    <nav>
-  <a href="index.html" data-page="index.html">
-    <img src="/ICONS/HOME.svg" class="nav-icon"> Home
-  </a>
-
-  <a href="#" data-page="dashboard">
-    <img src="/ICONS/DASHBOARD.svg" class="nav-icon"> Dashboard
-  </a>
-
-  <a href="about.html" data-page="about">
-    <img src="/ICONS/ABOUT.svg" class="nav-icon"> About
-  </a>
-
-  <a href="map.html" data-page="checkmap">
-    <img src="/ICONS/CHECK.svg" class="nav-icon"> Check Map
-  </a>
-
-  <a href="updates.html" data-page="updates">
-    <img src="/ICONS/UPDATES.svg" class="nav-icon"> Updates
-  </a>
-
-  <a href="#" data-page="contacts">
-    <img src="/ICONS/CONTACTS.svg" class="nav-icon"> Contacts
-  </a>
+  <button class="mobile-menu-button" id="mobileBtn">☰</button>
 </nav>
 
-  </div>
-  
 
-  <!-- MAIN -->
-  <div class="main">
-    <!-- TOP BAR WITH BACKGROUND -->
-    <div class="top-bar-wrapper">
-      <div class="top-bar">
-        <div class="welcome-text">Welcome, User!</div>
-        <div class="search-container">
-          <input type="text" placeholder="Search here...">
-        </div>
-        <div class="profile dropdown">
-  <img src="https://i.pinimg.com/736x/d9/7b/bb/d97bbb08017ac2309307f0822e63d082.jpg" alt="Profile">
-  <span class="dropdown-arrow">▼</span>
+    <div class="profile dropdown">
+      <img src="https://i.pinimg.com/736x/77/00/70/7700709ac1285b907c498a70fbccea5e.jpg">
+      <span class="dropdown-arrow">▼</span>
 
-  <div class="dropdown-menu">
-    <div class="dropdown-item">User Name</div>
+    <div class="dropdown-menu">
+    <div class="dropdown-item" id="displayUsername">Full Name</div>
     <div class="dropdown-item logout">Logout</div>
-  </div>
 </div>
 
-      </div>
     </div>
+  </div>
+</header>
 
-    <!-- OVERVIEW HEADER -->
-   <div class="overview-box">
-<div class="overview-header">Overview</div>
-<div class="scroll-wrapper" id="cardContainer"></div>
+
+
+<div class="main-layout">
+
+  <div class="left-side">
+    <div class="overview-header">Overview</div>
+    <div class="scroll-wrapper" id="cardContainer"></div>
+  </div>
+
+<div id="imagePopup">
+  <img src="" alt="Full Image" id="popupImg">
 </div>
 
 
-<!-- RECENT CHART WRAPPED IN WHITE BOX -->
+<div class="right-side">
+  <div class="weather-box" id="weatherBox">
+    <div class="overview-header">Weather</div>
+    <div class="weather-content">
+      <p class="placeholder-text">Loading Weather...</p>
+    </div>
+   
+  </div>
+
 <div class="chart-box">
-<h2 class="chart-title">Recent Chart</h2>
-<div class="chart-layout">
-<div class="big-chart-box">
-<p class="placeholder-text">📊 Bar Chart Goes Here</p>
+  <div class="chart-description">Hazard severity distribution</div>
+  <canvas id="severityChart"></canvas>
 </div>
-<div class="weather-box">
-<p class="placeholder-text">☀️ Live Weather</p>
-</div>
+
 </div>
 </div>
 
 
-<!-- TOP NEWS WRAPPED IN WHITE BOX -->
-<div class="news-box">
-<h2 class="section-title">Top News</h2>
-<div class="news-wrapper" id="newsContainer"></div>
-</div>
-
-<script>
-
-  const hamburgerBtn = document.getElementById("hamburgerBtn");
-const mobileNav = document.getElementById("mobileNav");
-
-// Show hamburger only on small screens
-function checkScreen() {
-  if(window.innerWidth <= 600){
-    hamburgerBtn.style.display = "block";
-  } else {
-    hamburgerBtn.style.display = "none";
-    mobileNav.style.display = "none";
-  }
-}
-checkScreen();
-window.addEventListener("resize", checkScreen);
-
-hamburgerBtn.addEventListener("click", () => {
-  mobileNav.style.display = mobileNav.style.display === "flex" ? "none" : "flex";
-});
-
-// Profile dropdown
-const dropdown = document.querySelector(".dropdown");
-const dropdownMenu = document.querySelector(".dropdown-menu");
-
-dropdown.addEventListener("click", () => {
-  dropdownMenu.classList.toggle("show");
-});
-
-// Close when clicking outside
-document.addEventListener("click", (e) => {
-  if (!dropdown.contains(e.target)) {
-    dropdownMenu.classList.remove("show");
-  }
-});
+  <footer class="footer">
+    <p class="footer-bottom">&copy; 2025 SafeRouteManolo. All rights reserved.</p>
+  </footer>
 
 
-  const navLinks = document.querySelectorAll(".sidebar nav a");
-  const main = document.querySelector(".main");
-
-navLinks.forEach(link => {
-  link.addEventListener("click", () => {
-    // optional: hover effect only
-    navLinks.forEach(l => l.classList.remove("active"));
-    link.classList.add("active");
-  });
-});
-
-
-
-  const issueData = [
-    { location: "Zone 3 Riverside", issue: "Flooding", date: "2025-01-12", icon: "https://cdn-icons-png.flaticon.com/512/606/606797.png" },
-    { location: "Purok 5 Highway", issue: "Road Damage", date: "2025-01-14", icon: "https://cdn-icons-png.flaticon.com/512/854/854866.png" },
-    { location: "Sitio Mabini", issue: "Power Outage", date: "2025-01-20", icon: "https://cdn-icons-png.flaticon.com/512/3105/3105186.png" },
-    { location: "Crossing Delta", issue: "Fallen Tree", date: "2025-01-21", icon: "https://cdn-icons-png.flaticon.com/512/616/616489.png" },
-        { location: "Crossing Delta", issue: "Fallen Tree", date: "2025-01-21", icon: "https://cdn-icons-png.flaticon.com/512/616/616489.png" },
-            { location: "Crossing Delta", issue: "Fallen Tree", date: "2025-01-21", icon: "https://cdn-icons-png.flaticon.com/512/616/616489.png" }
-  ];
-
-  const colors = ["#ff7675", "#74b9ff", "#55efc4", "#ffeaa7", "#fab1a0"];
-  const container = document.getElementById("cardContainer");
-
-  issueData.forEach((data, i) => {
-    const card = document.createElement("div");
-    card.className = "data-card";
-    const randomColor = colors[i % colors.length];
-
-    card.innerHTML = `
-      <div class="icon-box"><img src="${data.icon}"></div>
-      <div class="text-box">
-        <div class="field-title">Location:</div>
-        <div class="field-value">${data.location}</div>
-        <div class="field-title">Issue:</div>
-        <div class="field-value">${data.issue}</div>
-        <div class="field-title">Date:</div>
-        <div class="field-value">${data.date}</div>
-      </div>
-      <div class="color-line" style="background: ${randomColor}"></div>
-    `;
-    container.appendChild(card);
-  });
-
-  const newsData = [
-    { title: "Flood hits Riverside area", description: "Heavy rains caused flooding in Zone 3 Riverside, residents advised to stay indoors.", image: "https://cdn-icons-png.flaticon.com/512/414/414927.png" },
-    { title: "Highway road damage reported", description: "Purok 5 Highway has several potholes after recent landslides.", image: "https://cdn-icons-png.flaticon.com/512/854/854866.png" },
-    { title: "Power outage in Sitio Mabini", description: "Electricity has been disrupted due to fallen lines. Repairs ongoing.", image: "https://cdn-icons-png.flaticon.com/512/3105/3105186.png" }
-  ];
-
-  const newsContainer = document.getElementById("newsContainer");
-  newsData.forEach(item => {
-    const post = document.createElement("div");
-    post.className = "news-post";
-    post.innerHTML = `
-      <img src="${item.image}" alt="${item.title}">
-      <div class="news-text">
-        <div class="news-title">${item.title}</div>
-        <div class="news-desc">${item.description}</div>
-      </div>
-    `;
-    newsContainer.appendChild(post);
-  });
-</script>
+<script src="dashboard.js"></script>
 
 </body>
 </html>
