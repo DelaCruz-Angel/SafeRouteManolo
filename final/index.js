@@ -68,7 +68,7 @@ loginBtn.addEventListener('click', () => {
     loginMessage.textContent = 'Login successful! Redirecting...';
     setTimeout(() => { window.location.href = 'dashboard.html'; }, 2000);
   } else {
-    loginMessage.style.color = 'red';
+    loginMessage.style.color = 'bold red';
     loginMessage.textContent = 'Invalid email or password.';
   }
 });
