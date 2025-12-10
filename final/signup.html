@@ -1,160 +1,167 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/signup.css">
+  <link rel="stylesheet" href="signup.css">
   <title>Create Account</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
- 
+
 </head>
+
 <body>
 
-<div class="container">
-  <div class="left">
-    <div class="logo-wrapper">
-      <img src="/ICONS/purp.png" class="logo-icon">
-      <span class="logo-text"><span style="color: #734f96; font-weight: 900;">Safe</span>RouteManolo</span>
+  <div class="container">
+    <div class="left">
+      <div class="logo-wrapper">
+        <img src="purp.png" class="logo-icon">
+        <span class="logo-text"><span style="color: #734f96; font-weight: 900;">Safe</span>RouteManolo</span>
+      </div>
+    </div>
+
+
+    <div class="right">
+
+      <div class="mobile-logo">
+        <img src="/ICONS/purp.png">
+        <span><span style="color:#734f96; font-weight:900;">Safe</span>RouteManolo</span>
+      </div>
+
+      <h1 class="welcome-text">Create Account</h1>
+      <p class="sub-text">Fill in the information below</p>
+
+
+      <div class="input-row">
+        <div class="input-group small">
+          <label>First Name</label>
+          <input type="text">
+        </div>
+
+        <div class="input-group small">
+          <label>Last Name</label>
+          <input type="text">
+        </div>
+
+        <div class="input-group tiny">
+          <label>MI</label>
+          <input type="text" maxlength="1">
+        </div>
+      </div>
+
+
+      <div class="input-group">
+        <label>Email</label>
+        <input type="email">
+      </div>
+
+
+      <div class="input-group password-group">
+        <label>Password</label>
+        <input type="password" id="password">
+        <span class="toggle-password">👁️</span>
+      </div>
+
+
+      <div class="input-group password-group">
+        <label>Confirm Password</label>
+        <input type="password" id="confirmPassword">
+        <span class="toggle-password">👁️</span>
+      </div>
+
+
+      <p id="signupMessage" style="text-align:center; color:green; font-weight:600; margin-top:10px;"></p>
+
+
+      <button class="signup-btn">Sign Up</button>
+
+
+      <p class="signin-text">
+        Already have an account?
+        <a href="index.html">Sign in</a>
+      </p>
     </div>
   </div>
 
-
-  <div class="right">
-
-    <div class="mobile-logo">
-      <img src="/ICONS/purp.png">
-      <span><span style="color:#734f96; font-weight:900;">Safe</span>RouteManolo</span>
-    </div>
-
-    <h1 class="welcome-text">Create Account</h1>
-    <p class="sub-text">Fill in the information below</p>
-
-
-    <div class="input-row">
-      <div class="input-group small">
-        <label>First Name</label>
-        <input type="text">
-      </div>
-
-      <div class="input-group small">
-        <label>Last Name</label>
-        <input type="text">
-      </div>
-
-      <div class="input-group tiny">
-        <label>MI</label>
-        <input type="text" maxlength="1">
-      </div>
-    </div>
-
-  
-    <div class="input-group">
-      <label>Email</label>
-      <input type="email">
-    </div>
-
-
-    <div class="input-group password-group">
-      <label>Password</label>
-      <input type="password" id="password">
-      <span class="toggle-password">👁️</span>
-    </div>
-
-  
-    <div class="input-group password-group">
-      <label>Confirm Password</label>
-      <input type="password" id="confirmPassword">
-      <span class="toggle-password">👁️</span>
-    </div>
-
-   
-    <p id="signupMessage" style="text-align:center; color:green; font-weight:600; margin-top:10px;"></p>
-
-   
-    <button class="signup-btn">Sign Up</button>
-
-  
-    <p class="signin-text">
-      Already have an account?
-      <a href="index.html">Sign in</a>
-    </p>
-  </div>
-</div>
-
-<script>
-  document.querySelectorAll('.toggle-password').forEach((eye) => {
-    eye.addEventListener('click', () => {
-      const pwdInput = eye.previousElementSibling;
-      pwdInput.type = pwdInput.type === 'password' ? 'text' : 'password';
+  <script>
+    document.querySelectorAll('.toggle-password').forEach((eye) => {
+      eye.addEventListener('click', () => {
+        const pwdInput = eye.previousElementSibling;
+        pwdInput.type = pwdInput.type === 'password' ? 'text' : 'password';
+      });
     });
-  });
 
-  class User {
-    #firstName; #lastName; #mi; #email; #password;
-    constructor(firstName,lastName,mi,email,password){
-      this.#firstName=firstName; this.#lastName=lastName;
-      this.#mi=mi; this.#email=email; this.#password=password;
-    }
-    getEmail(){ return this.#email; }
-    checkPassword(password){ return this.#password===password; }
-    toJSON(){ return {firstName:this.#firstName,lastName:this.#lastName,mi:this.#mi,email:this.#email,password:this.#password}; }
-    saveToStorage(){ localStorage.setItem('user', JSON.stringify(this.toJSON())); }
-  }
-
-  const signupBtn = document.querySelector('.signup-btn');
-  const signupMessage = document.getElementById('signupMessage');
-
-
-  document.querySelectorAll('input[type="text"]').forEach((input,index)=>{
-    if(index<=2){
-      input.addEventListener('input',()=>{ input.value=input.value.replace(/[^a-zA-Z]/g,''); });
-    }
-  });
-
- 
-  signupBtn.addEventListener('click',()=>{
-    const inputsText=document.querySelectorAll('input[type="text"]');
-    const firstName=inputsText[0].value.trim();
-    const lastName=inputsText[1].value.trim();
-    const mi=inputsText[2].value.trim();
-    const email=document.querySelector('input[type="email"]').value.trim();
-    const password=document.getElementById('password').value.trim();
-    const confirmPassword=document.getElementById('confirmPassword').value.trim();
-
-    if(!firstName||!lastName||!email||!password||!confirmPassword){
-      signupMessage.style.color='red';
-      signupMessage.textContent='Please fill in all fields';
-      return;
+    class User {
+      #firstName; #lastName; #mi; #email; #password;
+      constructor(firstName, lastName, mi, email, password) {
+        this.#firstName = firstName; this.#lastName = lastName;
+        this.#mi = mi; this.#email = email; this.#password = password;
+      }
+      getEmail() { return this.#email; }
+      checkPassword(password) { return this.#password === password; }
+      toJSON() { return { firstName: this.#firstName, lastName: this.#lastName, mi: this.#mi, email: this.#email, password: this.#password }; }
+      saveToStorage() { localStorage.setItem('user', JSON.stringify(this.toJSON())); }
     }
 
-    if(!email.endsWith('@gmail.com')){
-      signupMessage.style.color='red';
-      signupMessage.textContent='Please use a valid Gmail account';
-      return;
-    }
+    const signupBtn = document.querySelector('.signup-btn');
+    const signupMessage = document.getElementById('signupMessage');
 
-    if(password!==confirmPassword){
-      signupMessage.style.color='red';
-      signupMessage.textContent='Passwords do not match';
-      return;
-    }
 
-    const passwordRegex=/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
-    if(!passwordRegex.test(password)){
-      signupMessage.style.color='red';
-      signupMessage.textContent='Password must be at least 8 characters long and include uppercase, lowercase, number, and special character';
-      return;
-    }
+    document.querySelectorAll('input[type="text"]').forEach((input, index) => {
+      if (index <= 2) {
+        input.addEventListener('input', () => { input.value = input.value.replace(/[^a-zA-Z]/g, ''); });
+      }
+    });
 
-    const newUser=new User(firstName,lastName,mi,email,password);
-    newUser.saveToStorage();
 
-    signupMessage.style.color='green';
-    signupMessage.textContent='Sign up successful! Redirecting to login...';
+    signupBtn.addEventListener('click', () => {
+      const inputsText = document.querySelectorAll('input[type="text"]');
+      const firstName = inputsText[0].value.trim();
+      const lastName = inputsText[1].value.trim();
+      const mi = inputsText[2].value.trim();
+      const email = document.querySelector('input[type="email"]').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const confirmPassword = document.getElementById('confirmPassword').value.trim();
 
-    setTimeout(()=>{ window.location.href='index.html'; },2000);
-  });
-</script>
+      if (!firstName || !lastName || !email || !password || !confirmPassword) {
+        signupMessage.style.color = 'red';
+        signupMessage.textContent = 'Please fill in all fields';
+        return;
+      }
+
+      if (!email.endsWith('@gmail.com')) {
+        signupMessage.style.color = 'red';
+        signupMessage.textContent = 'Please use a valid Gmail account';
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        signupMessage.style.color = 'red';
+        signupMessage.textContent = 'Passwords do not match';
+        return;
+      }
+
+      const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/;
+      if (!passwordRegex.test(password)) {
+        signupMessage.style.color = 'red';
+        signupMessage.textContent = 'Password must be at least 8 characters long and include uppercase, lowercase, number, and special character';
+        return;
+      }
+
+      const newUser = new User(firstName, lastName, mi, email, password);
+      newUser.saveToStorage();
+
+      signupMessage.style.color = 'green';
+      signupMessage.textContent = 'Sign up successful! Redirecting to login...';
+
+      setTimeout(() => { window.location.href = 'index.html'; }, 2000);
+    });
+  </script>
+
+  <footer class="footer">
+    <p class="footer-bottom">&copy; 2025 SafeRouteManolo. All rights reserved.</p>
+  </footer>
 
 </body>
+
 </html>

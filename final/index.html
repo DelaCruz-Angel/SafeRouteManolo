@@ -1,23 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="/index.css">
+  <link rel="stylesheet" href="index.css">
   <title>Login Page</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
- 
+
 </head>
+
 <body>
 
   <div class="container">
-<div class="left">
-<div class="logo-wrapper">
-  <img src="/ICONS/purp.png" class="logo-icon">
-  <span class="logo-text"><span style="color: #734f96; font-weight: 900;">Safe</span>RouteManolo</span>
-</div>
-</div>
-   <div class="mobile-logo">
+    <div class="left">
+      <div class="logo-wrapper">
+        <img src="purp.png" class="logo-icon">
+        <span class="logo-text"><span style="color: #734f96; font-weight: 900;">Safe</span>RouteManolo</span>
+      </div>
+    </div>
+    <div class="mobile-logo">
       <img src="/ICONS/purp.png">
       <span><span style="color:#734f96; font-weight:900;">Safe</span>RouteManolo</span>
     </div>
@@ -35,30 +37,33 @@
         <input type="text" id="username" placeholder="Enter your username or email">
       </div>
 
-    <div class="input-group">
-  <label for="password">Password</label>
-  <div style="position: relative;">
-    <input type="password" id="password" placeholder="Enter your password">
-    <span class="toggle-password" style="position:absolute; right:10px; top:50%; transform:translateY(-50%); cursor:pointer;">👁️</span>
-  </div>
-</div>
+      <div class="input-group">
+        <label for="password">Password</label>
+        <div style="position: relative;">
+          <input type="password" id="password" placeholder="Enter your password">
+          <span class="toggle-password"
+            style="position:absolute; right:10px; top:50%; transform:translateY(-50%); cursor:pointer;">👁️</span>
+        </div>
+      </div>
 
 
       <div class="forgot-password">Forgot password?</div>
-      
-   
-<p id="loginMessage" style="text-align:center; color:red; font-weight:600; margin-bottom:10px;"></p>
 
-<button class="login-btn" id="loginBtn">Login</button>
+
+      <p id="loginMessage" style="text-align:center; color:red; font-weight:600; margin-bottom:10px;"></p>
+
+      <button class="login-btn" id="loginBtn">Login</button>
 
 
 
       <div class="sub-text" style="text-align:center;">Or continue with</div>
-     <div class="social-login">
-  <img src="https://i.pinimg.com/1200x/5b/b0/f7/5bb0f73a7b3e0f976acad614a42e5040.jpg" alt="Facebook" id="fbLogin">
-  <img src="https://i.pinimg.com/1200x/60/41/99/604199df880fb029291ddd7c382e828b.jpg" alt="Google" id="gmailLogin">
-  <img src="https://i.pinimg.com/736x/19/42/d5/1942d5deb0f788e6228054cd92767ff6.jpg" alt="Instagram" id="instaLogin">
-</div>
+      <div class="social-login">
+        <img src="https://i.pinimg.com/1200x/5b/b0/f7/5bb0f73a7b3e0f976acad614a42e5040.jpg" alt="Facebook" id="fbLogin">
+        <img src="https://i.pinimg.com/1200x/60/41/99/604199df880fb029291ddd7c382e828b.jpg" alt="Google"
+          id="gmailLogin">
+        <img src="https://i.pinimg.com/736x/19/42/d5/1942d5deb0f788e6228054cd92767ff6.jpg" alt="Instagram"
+          id="instaLogin">
+      </div>
 
 
       <div class="signup-text">
@@ -70,115 +75,118 @@
 
 
 
-<script>
-  const slides = document.querySelectorAll('.slide');
-  let current = 0;
+  <script>
+    const slides = document.querySelectorAll('.slide');
+    let current = 0;
 
-  function nextSlide() {
-    slides[current].classList.remove('active');
-    current = (current + 1) % slides.length;
-    slides[current].classList.add('active');
-  }
-
-  setInterval(nextSlide, 3000);
-
-  class User {
-    #firstName;
-    #lastName;
-    #mi;
-    #email;
-    #password;
-
-    constructor(firstName, lastName, mi, email, password) {
-      this.#firstName = firstName;
-      this.#lastName = lastName;
-      this.#mi = mi;
-      this.#email = email;
-      this.#password = password;
+    function nextSlide() {
+      slides[current].classList.remove('active');
+      current = (current + 1) % slides.length;
+      slides[current].classList.add('active');
     }
 
-    getEmail() { return this.#email; }
-    checkPassword(password) { return this.#password === password; }
+    setInterval(nextSlide, 3000);
 
-    static loadFromStorage() {
-      const savedUser = JSON.parse(localStorage.getItem('user'));
-      if (!savedUser) return null;
-      return new User(
-        savedUser.firstName,
-        savedUser.lastName,
-        savedUser.mi,
-        savedUser.email,
-        savedUser.password
-      );
-    }
-  }
+    class User {
+      #firstName;
+      #lastName;
+      #mi;
+      #email;
+      #password;
 
-  const loginBtn = document.getElementById('loginBtn');
-  const gmailBtn = document.getElementById('gmailLogin');
-  const fbBtn = document.getElementById('fbLogin');
-  const instaBtn = document.getElementById('instaLogin');
-  const loginMessage = document.getElementById('loginMessage');
+      constructor(firstName, lastName, mi, email, password) {
+        this.#firstName = firstName;
+        this.#lastName = lastName;
+        this.#mi = mi;
+        this.#email = email;
+        this.#password = password;
+      }
 
- 
-  loginBtn.addEventListener('click', () => {
-    const inputEmail = document.getElementById('username').value.trim();
-    const inputPassword = document.getElementById('password').value.trim();
+      getEmail() { return this.#email; }
+      checkPassword(password) { return this.#password === password; }
 
-    const savedUser = User.loadFromStorage();
-    if (!savedUser) {
-      loginMessage.style.color = 'red';
-      loginMessage.textContent = 'No account found. Please sign up first.';
-      return;
-    }
-
-    if (inputEmail === savedUser.getEmail() && savedUser.checkPassword(inputPassword)) {
-      loginMessage.style.color = 'green';
-      loginMessage.textContent = 'Login successful! Redirecting...';
-      setTimeout(() => { window.location.href = 'dashboard.html'; }, 2000);
-    } else {
-      loginMessage.style.color = 'red';
-      loginMessage.textContent = 'Invalid email or password.';
-    }
-  });
-
- 
-  function socialLogin(platform) {
-    const input = prompt(`Enter your ${platform} email to continue:`);
-    if (!input) return;
-
-    const savedUser = User.loadFromStorage();
-    if (!savedUser) {
-      loginMessage.style.color = 'red';
-      loginMessage.textContent = 'No account found. Please sign up first.';
-      return;
+      static loadFromStorage() {
+        const savedUser = JSON.parse(localStorage.getItem('user'));
+        if (!savedUser) return null;
+        return new User(
+          savedUser.firstName,
+          savedUser.lastName,
+          savedUser.mi,
+          savedUser.email,
+          savedUser.password
+        );
+      }
     }
 
-    if (input === savedUser.getEmail()) {
-      loginMessage.style.color = 'green';
-      loginMessage.textContent = `${platform} login successful! Redirecting...`;
-      setTimeout(() => { window.location.href = 'dashboard.html'; }, 2000);
-    } else {
-      loginMessage.style.color = 'red';
-      loginMessage.textContent = `${platform} account not registered. Please sign up first.`;
+    const loginBtn = document.getElementById('loginBtn');
+    const gmailBtn = document.getElementById('gmailLogin');
+    const fbBtn = document.getElementById('fbLogin');
+    const instaBtn = document.getElementById('instaLogin');
+    const loginMessage = document.getElementById('loginMessage');
+
+
+    loginBtn.addEventListener('click', () => {
+      const inputEmail = document.getElementById('username').value.trim();
+      const inputPassword = document.getElementById('password').value.trim();
+
+      const savedUser = User.loadFromStorage();
+      if (!savedUser) {
+        loginMessage.style.color = 'red';
+        loginMessage.textContent = 'No account found. Please sign up first.';
+        return;
+      }
+
+      if (inputEmail === savedUser.getEmail() && savedUser.checkPassword(inputPassword)) {
+        loginMessage.style.color = 'green';
+        loginMessage.textContent = 'Login successful! Redirecting...';
+        setTimeout(() => { window.location.href = 'dashboard.html'; }, 2000);
+      } else {
+        loginMessage.style.color = 'red';
+        loginMessage.textContent = 'Invalid email or password.';
+      }
+    });
+
+
+    function socialLogin(platform) {
+      const input = prompt(`Enter your ${platform} email to continue:`);
+      if (!input) return;
+
+      const savedUser = User.loadFromStorage();
+      if (!savedUser) {
+        loginMessage.style.color = 'red';
+        loginMessage.textContent = 'No account found. Please sign up first.';
+        return;
+      }
+
+      if (input === savedUser.getEmail()) {
+        loginMessage.style.color = 'green';
+        loginMessage.textContent = `${platform} login successful! Redirecting...`;
+        setTimeout(() => { window.location.href = 'dashboard.html'; }, 2000);
+      } else {
+        loginMessage.style.color = 'red';
+        loginMessage.textContent = `${platform} account not registered. Please sign up first.`;
+      }
     }
-  }
 
-  gmailBtn.addEventListener('click', () => socialLogin('Gmail'));
-  fbBtn.addEventListener('click', () => socialLogin('Facebook'));
-  instaBtn.addEventListener('click', () => socialLogin('Instagram'));
-
+    gmailBtn.addEventListener('click', () => socialLogin('Gmail'));
+    fbBtn.addEventListener('click', () => socialLogin('Facebook'));
+    instaBtn.addEventListener('click', () => socialLogin('Instagram'));
 
 
-document.querySelectorAll('.toggle-password').forEach((eye) => {
-  eye.addEventListener('click', () => {
-    const pwdInput = eye.previousElementSibling;
-    pwdInput.type = pwdInput.type === 'password' ? 'text' : 'password';
-  });
-});
 
-</script>
+    document.querySelectorAll('.toggle-password').forEach((eye) => {
+      eye.addEventListener('click', () => {
+        const pwdInput = eye.previousElementSibling;
+        pwdInput.type = pwdInput.type === 'password' ? 'text' : 'password';
+      });
+    });
 
+  </script>
 
+  <footer class="footer">
+    <p class="footer-bottom">&copy; 2025 SafeRouteManolo. All rights reserved.</p>
+  </footer>
 
 </body>
+
 </html>
