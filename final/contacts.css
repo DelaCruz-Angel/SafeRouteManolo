@@ -5,19 +5,28 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
-  background-color: #fff;
-  color: #000;
-}
-
-
-header {
-  background-color: #ffffff;
+  background-image: url("road3.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   border-bottom: 1px solid #b5b5b5;
   position: sticky;
   top: 0;
   z-index: 1000;
 }
+
+
+header {
+  background-image: url("road2.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-bottom: 1px solid #b5b5b5;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
 
 .container {
   max-width: 1100px;
@@ -270,7 +279,7 @@ nav {
 .contact-hero {
   background: url('https://i.pinimg.com/1200x/14/fe/88/14fe88e4173a9f8edae09bc7cad3532f.jpg') no-repeat center center;
   background-size: cover;
-  height: 300px;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -291,6 +300,7 @@ nav {
   text-align: center;
 }
 
+
 .contact-section {
   padding: 60px 20px;
   text-align: center;
@@ -310,7 +320,7 @@ nav {
 }
 
 .contact-card {
-  background: #fff;
+  background: #8ee3f1;
   border-radius: 12px;
   padding: 30px;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);

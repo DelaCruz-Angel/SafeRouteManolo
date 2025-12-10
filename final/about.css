@@ -5,14 +5,34 @@
 }
 
 body {
-  font-family: Arial, sans-serif;
+  background-image: url("road3.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border-bottom: 1px solid #b5b5b5;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.mission-text {
+
+  flex: 1;
   background-color: #fff;
-  color: #000;
+  border-radius: 12px;
+  padding: 40px 20px;
+  text-align: center;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  margin: 0 10px;
 }
 
 
+
 header {
-  background-color: #ffffff;
+  background-image: url("road2.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
   border-bottom: 1px solid #b5b5b5;
   position: sticky;
   top: 0;
@@ -260,7 +280,7 @@ nav {
 .hero-small {
   background: url('https://i.pinimg.com/1200x/14/fe/88/14fe88e4173a9f8edae09bc7cad3532f.jpg') no-repeat center center;
   background-size: cover;
-  height: 300px;
+  height: 100px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -277,7 +297,7 @@ nav {
 }
 
 .hero-content h1 {
-  color: #ff68c4;
+  color: #e41a89;
   font-size: 3rem;
   text-align: center;
 }
@@ -290,7 +310,7 @@ nav {
 
 .about-section h2 {
   font-size: 1.8rem;
-  color: #ff68c4;
+  color: #e41a89;
   margin-bottom: 20px;
 }
 
@@ -309,7 +329,7 @@ nav {
 
 .features-section h2 {
   font-size: 1.8rem;
-  color: #ff68c4;
+  color: #e41a89;
   margin-bottom: 30px;
 }
 
@@ -358,7 +378,7 @@ nav {
 
 .mission-text h2 {
   font-size: 1.8rem;
-  color: #ff68c4;
+  color: #0b0b0b;
   margin-bottom: 10px;
 }
 

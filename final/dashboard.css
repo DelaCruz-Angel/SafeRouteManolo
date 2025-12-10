@@ -162,6 +162,7 @@ nav {
 
 
 .left-side {
+  background-color:#428bf900;
   margin-top: 5px;
   flex: 1;
   display: flex;
@@ -176,7 +177,7 @@ nav {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  background: #f0f2f5;
+  background: #428bf900;
 }
 
 
@@ -273,7 +274,7 @@ nav {
   max-height: 90%;
   object-fit: contain;
   border-radius: 10px;
-  box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+  box-shadow: 0 0 20px rgba(216, 52, 52, 0.3);
 }
 
 

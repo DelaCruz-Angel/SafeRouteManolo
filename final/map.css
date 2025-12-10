@@ -149,21 +149,20 @@ nav {
 }
 
 .info-box {
-  background-image: url("road1.jpg");
+  background-image: url("road3.jpg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  border-bottom: 1px solid #b5b5b5;
-  position: sticky;
-  top: 0;
-  z-index: 1000;
-  flex: 1;
+  position: relative; /* IMPORTANT: remove sticky */
+  z-index: 1;         /* Lower than header */
   padding: 16px;
   box-shadow: 0 6px 22px rgba(0, 0, 0, 0.06);
   overflow: auto;
+  flex: 1;
   display: flex;
   flex-direction: column;
 }
+
 
 .info-empty {
   color: #cc1414;
